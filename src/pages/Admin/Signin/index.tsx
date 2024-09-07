@@ -92,7 +92,7 @@ const AdminSignup = (): JSX.Element => {
         }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>submit</button>
         <main>
           <p className='text-[0.8rem]'>
-            Dont have an account? <Link to="/">Sign up</Link>
+            Dont have an account? <Link to="/signup">Sign up</Link>
           </p>
           <p className='text-[0.8rem]'>
             <Link to="/forgot-password">Forget Password?</Link>

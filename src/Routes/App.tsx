@@ -3,7 +3,6 @@ import { Navigate, Outlet, Route, Routes } from 'react-router'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import AddToHomeScreen from '../components/AddHomeComp';
-import { AnimatePresence } from 'framer-motion'
 import '../App.css'
 import AdminSignup from "../pages/Admin/Signup";
 import AdminSignin from "../pages/Admin/Signin";
@@ -23,8 +22,8 @@ const App = () => {
   return (
     <>
       <Routes >
-        <Route path="/" element={<AdminSignup />} />
-        <Route path="signin" element={<AdminSignin />} />
+        <Route path="/signup" element={<AdminSignup />} />
+        <Route path="/" element={<AdminSignin />} />
 
         {/* <Route path="forgot-password" element={<AdminForgetPassword />} />
         <Route path="new-password" element={<AdminNewpassword />} /> */}

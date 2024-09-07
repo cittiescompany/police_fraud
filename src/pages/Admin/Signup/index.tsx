@@ -231,7 +231,7 @@ const AdminSignup = (): JSX.Element => {
                     formik.handleSubmit()
                 }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Continue</button>
                 <main>
-                    <p className='text-[0.8rem]'>Already have an account? <Link to='/signin'>Login here</Link></p>
+                    <p className='text-[0.8rem]'>Already have an account? <Link to='/'>Login here</Link></p>
                 </main>
 
                 <Modal
