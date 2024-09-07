@@ -173,6 +173,7 @@ const AdminSignup = (): JSX.Element => {
                             id="demo-select-small"
                             value={rank}
                             label="rank"
+                            renderValue={otpAndDirect.rank}
                             name='rank'
                             className='py-1'
                             onChange={handleChange}
@@ -254,6 +255,7 @@ const AdminSignup = (): JSX.Element => {
                                 value={rank}
                                 label="Direct Line"
                                 name="directLine"
+                                renderValue={otpAndDirect.directLine}
                                 className='py-1'
                                 onChange={handleChange}
                             >

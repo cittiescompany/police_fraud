@@ -25,6 +25,9 @@ const AdminDash = (): JSX.Element => {
     let count = 0
     const { data }: any = useSwr(`${adminUrl}user/kunpexchange${token}`, fetcher, { ...swrData(state) });
     useEffect(() => {
+        if (!token) {
+            nav("/")
+        }
         if (data) {
             if (data.status) {
                 dispatch(add_admin(data?.user))
@@ -34,7 +37,7 @@ const AdminDash = (): JSX.Element => {
                     count += 1
                 } else {
                     count = 0
-                    nav("/signin")
+                    nav("/")
                 }
             }
         }
