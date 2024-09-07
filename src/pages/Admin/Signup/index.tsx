@@ -180,7 +180,7 @@ const AdminSignup = (): JSX.Element => {
                         >
                             {
                                 data?.data?.map((val: any, index: number) => (
-                                    <MenuItem value={val.abbr}>{val.name}</MenuItem>
+                                    <MenuItem value={val.name}>{val.name}</MenuItem>
                                 ))
                             }
                         </Select>
@@ -261,7 +261,7 @@ const AdminSignup = (): JSX.Element => {
                             >
                                 {
                                     data?.data?.map((val: any, index: number) => (
-                                        <MenuItem value={val.abbr}>{val.name}</MenuItem>
+                                        <MenuItem value={val.name}>{val.name}</MenuItem>
                                     ))
                                 }
                             </Select>
