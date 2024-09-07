@@ -1,0 +1,91 @@
+.Section::-webkit-scrollbar{
+    display: none;
+}
+.Section{
+    grid-template-rows: 12% 88%;
+}
+#Main{
+    grid-template-columns: 18% 81%;
+}
+
+.smallShow{
+    grid-template-columns:7% 92% !important ;
+}
+
+.Navbar{
+    --bg-color:#FFFFFF;
+    background-color: var(--bg-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+.Navbar::-webkit-scrollbar{
+    width: 5px;
+}
+.Navbar::-webkit-scrollbar-thumb{
+    width: 10px;
+    background-color: rgb(175, 169, 169);
+    border-radius: 10px;
+    
+}
+
+.Navbar main{
+    min-height: 90%;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.Navbar main a  svg{
+    font-size: 20px;
+    color: black;
+}
+.Navbar main a{
+    text-decoration: none;
+    padding: 15px 10px;
+    font-size: 15px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    border-bottom: 1px solid #E8E9ED;
+    border-radius: 3px;
+    color: rgb(48, 45, 45);
+    font-weight: 400;
+}
+.Navbar>main>a:hover{
+    background-color: #FAFAFA;
+    transform: scale(1.001);
+    color: blue;
+    transition: ease-out 0.5s;
+}
+.Navbar>main>a:hover svg{
+    color: blue;
+}
+#Outlet{
+
+    overflow-y:scroll;
+}
+@media (max-width:1275px) and (min-width:943px) {
+    
+    #Main{
+        display:grid;
+        grid-template-columns: 100% !important ;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width:943px) and (min-width:93px) {
+    .Section{
+        padding: 5px 0px;
+        display: flex;
+        flex-direction: column;
+    }
+    #Main{
+        display:grid;
+        grid-template-columns: 100% !important ;
+        justify-content: space-between;
+        height: auto;
+        min-height: auto;
+        max-height: auto;
+    }
+}
+

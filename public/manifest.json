@@ -1,0 +1,42 @@
+{
+    "name": "Kunpexchange",
+    "short_name": "Kunpexchange",
+    "theme_color": "#338bd0",
+    "background_color": "#1c89e0",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+  "icons": [
+    {
+      "src":"maskable.png",
+      "sizes":"192x192",
+      "type":"image/png",
+      "purpose":"any maskable"
+    },
+    {
+      "src":"logo192.png",
+      "sizes":"192x115",
+      "type":"image/png"
+    },
+    {
+      "src":"logo256.png",
+      "sizes":"256x154",
+      "type":"image/png"
+    },
+    {
+      "src":"logo384.png",
+      "sizes":"384x230",
+      "type":"image/png"
+    },
+    {
+      "src":"logo512.png",
+      "sizes":"512x307",
+      "type":"image/png"
+    }
+  ],
+  "related_applications": [{
+    "platform": "kunpexchange",
+    "url": "https://kunpexchange.vercel.app/manifest.json"
+  }]
+ 
+}

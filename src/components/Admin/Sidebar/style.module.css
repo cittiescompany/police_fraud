@@ -1,0 +1,43 @@
+
+.Navbar::-webkit-scrollbar{
+    width: 5px;
+}
+.Navbar::-webkit-scrollbar-thumb{
+    width: 10px;
+    background-color: rgb(175, 169, 169);
+    border-radius: 10px;
+    
+}
+
+.Navbar main a  svg{
+    font-size: 20px;
+    color: black;
+}
+
+/* .Navbar main a{
+    text-decoration: none;
+    padding: 15px 10px;
+    font-size: 12px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    border-bottom: 1px solid #E8E9ED;
+    border-radius: 3px;
+    color: rgb(48, 45, 45);
+    font-weight: 400;
+} */
+.Navbar>main>a:hover,.activeClassName{
+    background-color: #FAFAFA;
+    transform: scale(1.001);
+    color: blue;
+    transition: ease-out 0.5s;
+}
+.Navbar>main>a:hover svg,.activeClassName svg{
+    color: blue;
+}
+
+@media (max-width:1275px) {
+    .Navbar{
+        display: none !important; 
+    }
+}

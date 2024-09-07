@@ -1,0 +1,88 @@
+.container{
+    display:grid;
+    height: 100%;
+    max-height: 100%;
+    grid-template-rows: 20% 78%;
+}
+.container::-webkit-scrollbar{
+    display: none;
+}
+#MainCard{
+    display: grid;
+    width: 100%; 
+    grid-template-columns: repeat(auto-fill, 24%);
+    justify-content: space-around;
+    grid-gap: 10px;
+}
+#Outlet{
+    margin-top: 20px;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 10px 0px;
+}
+
+@media (max-width:943px) {
+    #Outlet{
+        overflow-y:hidden;
+        margin-top: 40px;
+        max-width: 100%;
+        max-height: auto;
+    }
+    .container{
+        max-height:auto;
+    }
+}
+    /*
+    .container{
+        display:flex;
+        gap: 10px;
+        flex-direction: column;
+        height: auto;
+        max-height: auto !important;
+    }
+    #MainCard{
+        display: flex;
+        width: 100%; 
+        min-width: 100%; 
+        max-width: 100%; 
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-height: auto !important ; 
+        min-height: auto !important; 
+        padding: 10px 0;
+        gap: 40px;
+        
+    }
+    
+} */
+
+@media (max-width:726px)  and (min-width:374px){
+    #MainCard{
+        display: grid;
+        width: 100%; 
+        grid-template-columns: repeat(auto-fill, 45%);
+        flex-wrap: wrap;
+        justify-content: space-around;
+        
+    }
+    #Outlet{
+        overflow-y:hidden;
+        margin-top: 3rem;
+       max-width: 100%;
+
+    }
+ }
+@media (max-width:374px)  and (min-width:37px){
+    #MainCard{
+        display: grid;
+        width: 100%; 
+        grid-template-columns: repeat(auto-fill, 48%);
+        justify-content: space-around;
+        
+    }
+    #Outlet{
+        overflow-y:hidden;
+        margin-top: 8rem;
+       max-width: 100%;
+    }
+ }
