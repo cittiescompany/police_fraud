@@ -13,39 +13,48 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Modal, message } from 'antd';
 import { useGetData } from '../../../content'
 import Loader from '../../../components/Loader';
+const officialEmailPattern = /^[a-zA-Z0-9._%+-]+@(?!gmail\.com$|yahoo\.com$|outlook\.com$|hotmail\.com$|live\.com$|icloud\.com$|me\.com$|mac\.com$|aol\.com$|protonmail\.com$|zoho\.com$|mail\.com$|gmx\.com$|yandex\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
 const AdminSignup = (): JSX.Element => {
     const [messageApi, contextHolder] = message.useMessage();
     const [loading, setLoading] = useState(false);
-    const [rank, setRank] = useState('');
-    const [otpAndDirect, setotpAndDirect] = useState<any>({ otp: "", directLine: "", rank: "" })
-    const [otp, setOtp] = useState("")
-    const [open, setOpen] = useState(false);
-    const [newData, setNewData] = useState({})
+    const [otpAndDirect, setotpAndDirect] = useState<{ directLineRank: String | any, directLineEmail: String | any, directLineName: String | any } | any>({ directLineRank: "", directLineEmail: "", directLineName: "" })
+    const [open, setOpen] = useState(0);
+    const [state, setState] = useState(true)
+    const [newData, setNewData] = useState<any>({})
     const [data] = useGetData(`${adminUrl}user/get_all_ranks`)
 
     const handleChange = (event: SelectChangeEvent) => {
         setotpAndDirect((prev: any) => ({ ...prev, [event?.target?.name]: event.target.value }))
     };
     const handleOk = async () => {
-        if (!otpAndDirect.otp || otpAndDirect.otp.length < 3) return messageApi.warning("Invalid otp")
-        if (!otpAndDirect.directLine) return messageApi.warning("Direct line is required")
+        if (open == 1) {
+            if (!otpAndDirect.directLineRank) return messageApi.warning("Direct manager rank is required")
+            if (!otpAndDirect.directLineName) return messageApi.warning("Direct manager name is required")
+            if (!otpAndDirect.directLineEmail) return messageApi.warning("Direct manager email is required")
+            // if (!officialEmailPattern.test(otpAndDirect.directLineEmail)) return messageApi.warning("Direct manager email must be an official email")
+        }
         try {
-
             setLoading(true)
-            const response = await axios.post(`${adminUrl}user/register`, { ...newData, ...otpAndDirect })
-            console.log(response)
+            const rank_id = data.data.find((val: any) => val.rank == newData.rank)
+
+
+            const response = await axios.post(`${adminUrl}user/${open == 1 ? "create_otp" : "register"}`, { ...otpAndDirect, ...newData, rank_id });
             if (response.data.status) {
-                messageApi.success("success");
-                nav("/signin")
+                messageApi.success(response.data.message)
+                if (open == 2) {
+                    nav("/")
+                } else {
+                    setOpen(2)
+                }
             } else {
                 messageApi.error(response.data.message)
             }
         } catch (error: any) {
-            console.log(error.response.data.message)
-            messageApi.error(error.response.data.message)
-        }
-        finally {
+            console.log(error)
+            messageApi.error(error.response.data.message || error.message)
+
+        } finally {
             setLoading(!true)
         }
     }
@@ -68,7 +77,7 @@ const AdminSignup = (): JSX.Element => {
                 return
             };
             setNewData({ last_name: data.lastname, first_name: data.firstname, email: data.email, phone: data.phonenumber, password: data.password, })
-            setOpen(true)
+            setOpen(1)
         },
         validationSchema: yup.object({
             firstname: yup.string().required("First Name is required"),
@@ -171,9 +180,8 @@ const AdminSignup = (): JSX.Element => {
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={rank}
+                            value={otpAndDirect.rank}
                             label="rank"
-                            renderValue={otpAndDirect.rank}
                             name='rank'
                             className='py-1'
                             onChange={handleChange}
@@ -186,26 +194,6 @@ const AdminSignup = (): JSX.Element => {
                         </Select>
                     </FormControl>
                 </div>
-                {/* <div className="inputBox mb-0 mt-3 p-0 ">
-                    <FormControl sx={{}} fullWidth size="small" >
-                        <InputLabel id="demo-select-small-label">Ranks</InputLabel>
-                        <Select
-                            labelId="demo-select-small-label"
-                            id="demo-select-small"
-                            value={rank}
-                            label="ranke"
-                            className='py-1'
-                            onChange={handleChange}
-                        >
-                            {
-                                policeRanks.map((val: string, index: number) => (
-
-                                    <MenuItem value={val}>{val}</MenuItem>
-                                ))
-                            }
-                        </Select>
-                    </FormControl>
-                </div> */}
                 <span className='text-danger text-center' style={{
                     fontSize: '0.85rem',
                     display: formik.touched?.phonenumber ? formik.errors?.phonenumber ? 'block' : 'none' : 'none'
@@ -236,48 +224,69 @@ const AdminSignup = (): JSX.Element => {
                 </main>
 
                 <Modal
-                    title="AUTHORISE OTP"
-                    open={open}
+                    title="DIRECT MANAGER INFORMATION"
+                    open={!!([1, 2].includes(open))}
                     closable={false}
-                    onCancel={() => setOpen(false)}
+                    onCancel={() => setOpen(0)}
                     footer={[
 
                     ]}
 
                 >
+                    {open == 1 ?
+                        <>
+                            <div className="inputBox mb-0 mt-3 p-0  ">
+                                <FormControl sx={{}} fullWidth size="small" >
+                                    <InputLabel id="demo-select-small-label bg-white z-[999]">Direct line</InputLabel>
+                                    <Select
+                                        labelId="demo-select-small-label"
+                                        id="demo-select-small"
+                                        label="Direct Line"
+                                        name="directLineRank"
+                                        value={otpAndDirect.directLine}
+                                        className='py-1'
+                                        onChange={handleChange}
+                                    >
+                                        {
+                                            data?.data?.filter((val: any) => val.index > 7)?.map((val: any, index: number) => (
+                                                <MenuItem value={val.name}>{val.name}</MenuItem>
+                                            ))
+                                        }
+                                    </Select>
+                                </FormControl>
+                            </div>
 
-                    <div className="inputBox mb-0 mt-3 p-0  ">
-                        <FormControl sx={{}} fullWidth size="small" >
-                            <InputLabel id="demo-select-small-label bg-white z-[999]">Direct line</InputLabel>
-                            <Select
-                                labelId="demo-select-small-label"
-                                id="demo-select-small"
-                                value={rank}
-                                label="Direct Line"
-                                name="directLine"
-                                renderValue={otpAndDirect.directLine}
-                                className='py-1'
-                                onChange={handleChange}
-                            >
-                                {
-                                    data?.data?.map((val: any, index: number) => (
-                                        <MenuItem value={val.name}>{val.name}</MenuItem>
-                                    ))
-                                }
-                            </Select>
-                        </FormControl>
-                    </div>
+                            <div className="inputBox mb-0 mt-3"  >
+                                <input required={true}
+                                    name='directLineName'
+                                    onChange={handleChange}
+                                    type="text" className='text-dark'
+                                />
+                                <span>Full name</span>
+                            </div>
 
-                    <div className="inputBox mb-0 mt-3"  >
-                        <input required={true}
-                            name='otp'
-                            onChange={handleChange}
-                            type="text" className='text-dark'
-                        />
-                        <span>OTP</span>
-                    </div>
-
-                    <button className={`${Style.button} mt-4 mx-auto block`} onClick={() => { handleOk() }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Submit</button>
+                            <div className="inputBox mb-0 mt-3"  >
+                                <input required={true}
+                                    name='directLineEmail'
+                                    onChange={handleChange}
+                                    type="text" className='text-dark'
+                                />
+                                <span>Official Email</span>
+                            </div>
+                        </>
+                        : open == 2 ?
+                            <>
+                                <div className="inputBox mb-0 mt-3"  >
+                                    <input required={true}
+                                        name='otp'
+                                        onChange={handleChange}
+                                        type="text" className='text-dark'
+                                    />
+                                    <span>OTP</span>
+                                </div>
+                            </> :
+                            null}
+                    <button className={`${Style.button} mt-4 mx-auto block`} onClick={() => { handleOk() }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Send OTP</button>
                 </Modal>
 
             </main>
@@ -287,27 +296,3 @@ const AdminSignup = (): JSX.Element => {
 }
 export default AdminSignup
 
-const policeRanks = [
-    "Police Officer",            // Entry-level rank
-    "Senior Police Officer",     // Slightly above Police Officer
-    "Corporal",                  // First supervisory rank
-    "Sergeant",                  // Non-commissioned officer
-    "Staff Sergeant",            // Senior non-commissioned officer
-    "Warrant Officer",           // Senior supervisory rank
-    "Inspector",                 // Junior officer rank
-    "Senior Inspector",          // Mid-level officer rank
-    "Chief Inspector",           // Senior officer rank
-    "Superintendent",            // First management rank
-    "Senior Superintendent",     // Senior management rank
-    "Chief Superintendent",      // Higher management rank
-    "Assistant Commissioner",    // Junior executive rank
-    "Deputy Commissioner",       // Mid-level executive rank
-    "Commissioner",              // Senior executive rank
-    "Assistant Chief Constable", // Executive rank in some regions
-    "Deputy Chief Constable",    // Senior executive rank
-    "Chief Constable",           // Highest rank in some police forces
-    "Deputy Inspector General",  // Senior executive rank in some regions
-    "Inspector General",         // Very senior rank in some regions
-    "Deputy Director General",   // Higher executive rank
-    "Director General"           // Highest rank in many regions
-];

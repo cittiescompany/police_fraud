@@ -13,17 +13,26 @@ import { Dropdown, Space } from 'antd';
 
 interface obj { text: string, icons: any, link: string, click?: any }
 
-const data: obj[] = [
-  { text: 'Dashboard', icons: <GrProjects size={20} />, link: "/admin/dashboard" },
-  { text: "Individual ", icons: <ImProfile size={20} />, link: "/admin/dashboard/users/individual-accounts" },
-  { text: "Business account", icons: <FaBriefcase size={20} />, link: "/admin/dashboard/users/business-acounts/" },
-  { text: "Communities", icons: <FaPeopleGroup size={20} />, link: "/admin/dashboard/communities/" },
-  {
-    text: "Log Out", icons: <FaSignOutAlt size={20} color='red' />, link: "/", click: () => {
-      localStorage.removeItem("adminLoginToken")
-    }
-  },
-]
+const data = [
+  { text: 'Verify BVN, ID card, Phone number, CAC', icons: <GrProjects size={20} />, link: "/admin/verify" },
+  { text: "Bank account validation", icons: <FaBriefcase size={20} />, link: "/admin/bank-validation" },
+  { text: "Post No Debit Request", icons: <FaBriefcase size={20} />, link: "/admin/no-debit-request" },
+  { text: "Bank statement", icons: <FaBriefcase size={20} />, link: "/admin/bank-statement" },
+  { text: "Phone call log", icons: <FaBriefcase size={20} />, link: "/admin/phone-call-log" },
+  { text: "Arrest warrant", icons: <FaBriefcase size={20} />, link: "/admin/arrest-warrant" },
+  { text: "Whatsapp family and friends", icons: <FaBriefcase size={20} />, link: "/admin/whatsapp-family-friends" },
+  { text: "New petition approval console", icons: <FaBriefcase size={20} />, link: "/admin/new-petition-approval" },
+  { text: "Social media tracking", icons: <FaBriefcase size={20} />, link: "/admin/social-media-tracking" },
+  { text: "Conference (Zoom) meeting with officers", icons: <FaBriefcase size={20} />, link: "/admin/conference-meeting" },
+  { text: "Legal console", icons: <FaBriefcase size={20} />, link: "/admin/legal-console" },
+  { text: "Dispatch driver", icons: <FaBriefcase size={20} />, link: "/admin/dispatch-driver" },
+  { text: "Request for cab", icons: <FaBriefcase size={20} />, link: "/admin/request-cab" },
+  { text: "Report fraud", icons: <FaBriefcase size={20} />, link: "/admin/report-fraud" },
+  { text: "Order food", icons: <FaBriefcase size={20} />, link: "/admin/order-food" },
+  { text: "Health (Hospital)", icons: <FaBriefcase size={20} />, link: "/admin/health-hospital" },
+  { text: "Cell Daily attendance", icons: <FaBriefcase size={20} />, link: "/admin/daily-attendance" }
+];
+
 
 
 const LargeScreenSidebar = ({ toggle }: any) => {
@@ -49,8 +58,8 @@ export const Links = ({ toggle, }: any) => {
     <main className='m-h-[90%] w-full list-none flex flex-col gap-1'>
 
       {data.map((item: obj, index: number) =>
-        <button data-bs-dismiss="offcanvas" onClick={() => item.click ? item.click() : undefined} key={index} aria-label="Close" className='hover:bg-[blue] hover:text-[#fff] border-2  text-[16px] m-h-[10%] bg-[#FAFAFA] px-5 py-1 md:p-5 '>
-          <NavLink to={item.link} className='w-full grid no-underline py-3 md:py-4 px-2 text-xs grid-cols-[20%_80%]  text-transparent  font-normal bg-transparent' style={({ isActive }) => activeStyle(isActive)} key={index} >
+        <button data-bs-dismiss="offcanvas" id={Style.linkButton} onClick={() => item.click ? item.click() : undefined} key={index} aria-label="Close" className='hover:bg-[blue]  hover:text-[#fff] border-2  text-[0.8rem] m-h-[10%] bg-[#FAFAFA] px-5 py-1 md:p-5 '>
+          <NavLink to={item.link} className='w-full grid no-underline py-3 md:py-4  text-xs grid-cols-[20%_80%]  text-transparent  font-normal bg-transparent' style={({ isActive }) => activeStyle(isActive)} key={index} >
             <span data-bs-dismiss="offcanvas" aria-label="Close">
               {item.icons}
             </span>
@@ -63,7 +72,6 @@ export const Links = ({ toggle, }: any) => {
         </button>
 
       )}
-      <App />
     </main>
   )
 }
@@ -78,45 +86,4 @@ export const Links = ({ toggle, }: any) => {
 
 
 
-
-
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-        1st menu item
-      </a>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <b rel="noopener noreferrer" className='py-4'>
-        2nd menu item (disabled)
-      </b>
-    ),
-    icon: <SmileOutlined />,
-  },
-  {
-    key: '3',
-    label: (
-      <b rel="noopener noreferrer" className='py-4'>
-        3rd menu item (disabled)
-      </b>
-    ),
-  },
-
-];
-
-const App: React.FC = () => (
-  <Dropdown menu={{ items }} arrow placement="topRight" className="custom-dropdown">
-    <a onClick={(e) => e.preventDefault()}>
-      <Space>
-        Hover me
-        <DownOutlined />
-      </Space>
-    </a>
-  </Dropdown>
-);
 

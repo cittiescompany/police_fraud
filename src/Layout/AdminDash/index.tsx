@@ -42,7 +42,7 @@ const AdminDash = (): JSX.Element => {
             }
         }
     }, [data])
-    if (state === "success")
+    if (state == "success")
         return (<>
             <section className={`${Style.Section} py-[5px] grid`} style={{ maxHeight: `${height}px`, minHeight: `${height}px`, height: `${height}px` }}>
                 <Nav setToggle={FuncToggle} toggle={toggle} />
