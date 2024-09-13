@@ -11,7 +11,7 @@ const Nav = ({ setToggle, toggle }: any) => {
   return (
     <nav className={`flex items-center sticky justify-between top-0 w-full bg-white border-b border-[#E8E9ED] px-3 z-[333] ${width <= 943 ? 'h-24 min-h-[100px]' : ''}`}>
       <div className='flex justify-evenly items-center gap-8 px-[10px] text-base'>
-        <span className='py-[0.6rem] text-xl'>Police Fraud Unit</span>
+        <span className='py-[0.6rem] md:text-xl '>Police Fraud Unit</span>
         <button data-bs-toggle={width <= 1275 ? "offcanvas" : ""} className='bg-transparent text-xl' data-bs-target={width <= 1275 ? "#Smallscreensiderbar" : ""}
           aria-controls={width <= 1275 ? "Smallscreensiderbar" : ""}
           onClick={() => {

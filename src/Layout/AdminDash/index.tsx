@@ -67,12 +67,12 @@ export default AdminDash
 const SmallScreenSidebar = () => {
 
     return (
-        <div className="offcanvas offcanvas-start pt-4" tabIndex={-1} id="Smallscreensiderbar" aria-labelledby="offcanvasExampleLabel">
+        <div className="offcanvas offcanvas-start pt-4 border border-red-400" tabIndex={-1} id="Smallscreensiderbar" aria-labelledby="offcanvasExampleLabel">
             <div className="offcanvas-header  border-0 border-bottom">
-                <h2 className="offcanvas-title" id="offcanvasExampleLabel">cities</h2>
+                <h2 className="offcanvas-title" id="offcanvasExampleLabel">Police Fraud Unit</h2>
                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div className={`${Style.Navbar} w-full h-full overflow-y-scroll s offcanvas-body`}>
+            <div className={`${Style.Navbar} w-full h-full overflow-y-scroll s offcanvas-body border-red-600`}>
                 <Links toggle={true} />
             </div>
         </div>

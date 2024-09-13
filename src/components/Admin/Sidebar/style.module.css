@@ -35,4 +35,8 @@
     .Navbar {
         display: none !important;
     }
+
+    #linkButton>a {
+        font-size: 0.68rem;
+    }
 }
