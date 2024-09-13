@@ -10,12 +10,7 @@ import AdminForgetPassword from "../pages/Admin/ForgetPassword";
 import AdminNewpassword from "../pages/Admin/Newpassword";
 import AdminDash from "../Layout/AdminDash";
 import Dashboard from "../pages/Admin/Dashboard";
-import ListOfUsers from "../pages/Admin/ListOfUsers";
-import UserDetails from "../pages/Admin/ListOfUsers/User";
-import LoginTimes from "../pages/Admin/LoginTime";
-import Helmetpage from "../Layout/Helmet";
-import CommunityTable from '../pages/Admin/Communities';
-import Gallery from '../pages/Admin/Gallery';
+import Verify from "../pages/Admin/Verify";
 
 const App = () => {
 
@@ -30,23 +25,8 @@ const App = () => {
 
         <Route path="admin/dashboard/*" element={<AdminDash />}>
           <Route index element={<Dashboard />} />
-          <Route path='communities' element={<CommunityTable />} />
+          <Route path="verify" element={<Verify />} />
 
-          <Route path="login-times/*" element={<Outlet />}>
-            <Route index element={<LoginTimes />} />
-            <Route path=":LoginId" element={<LoginTimes />} />
-            <Route path="*" element={<Navigate to="/admin/dashboard" />} />
-          </Route>
-
-          <Route path="users/:name/*" element={<Outlet />}>
-            <Route index element={<ListOfUsers />} />
-            <Route path=":userId/*" element={<Outlet />} >
-              <Route index element={<UserDetails />} />
-              <Route path='gallery' element={<Gallery />} />
-              <Route path="*" element={<Navigate to="/admin/dashboard" />} />
-            </Route>
-            <Route path="*" element={<Navigate to="/admin/dashboard" />} />
-          </Route>
 
 
           <Route path="*" element={<Navigate to="/admin/dashboard" />} />

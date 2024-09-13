@@ -5,7 +5,6 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios';
 import { adminUrl } from '../../../BackendUrl';
-import { toast } from 'react-toastify';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';

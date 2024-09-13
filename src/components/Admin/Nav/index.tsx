@@ -21,6 +21,7 @@ const Nav = ({ setToggle, toggle }: any) => {
       <div className='grid  justify-around items-center'>
         <span className='text-md'> <BackgroundLetterAvatars name={`${admin?.name}`} /></span>
       </div>
+
     </nav>
   )
 }
