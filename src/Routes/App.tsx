@@ -11,6 +11,8 @@ import AdminNewpassword from "../pages/Admin/Newpassword";
 import AdminDash from "../Layout/AdminDash";
 import Dashboard from "../pages/Admin/Dashboard";
 import Verify from "../pages/Admin/Verify";
+import BankAccount from "../pages/Admin/BankAccount";
+import Court from "../pages/Admin/Court";
 
 const App = () => {
 
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="admin/dashboard/*" element={<AdminDash />}>
           <Route index element={<Dashboard />} />
           <Route path="verify" element={<Verify />} />
+          <Route path="bank-account" element={<BankAccount />} />
+          <Route path="court" element={<Court />} />
 
 
 

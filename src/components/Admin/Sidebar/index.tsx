@@ -14,9 +14,9 @@ import { Dropdown, Space } from 'antd';
 interface obj { text: string, icons: any, link: string, click?: any }
 
 const data = [
-  { text: 'Verify BVN, ID card, Phone number, CAC', icons: <GrProjects size={20} />, link: "/admin/dashboard/verify" },
-  { text: "Bank account validation", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
-  { text: "Post No Debit Request", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
+  { text: 'Document verification', icons: <GrProjects size={20} />, link: "/admin/dashboard/verify" },
+  { text: "Bank account validation", icons: <FaBriefcase size={20} />, link: "/admin/dashboard/bank-account" },
+  { text: "Post No Debit Request", icons: <FaBriefcase size={20} />, link: "/admin/dashboard/court" },
   { text: "Bank statement", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
   { text: "Phone call log", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
   { text: "Arrest warrant", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
