@@ -19,8 +19,7 @@ const AdminSignup = (): JSX.Element => {
     onSubmit: (data) => {
       setLoading(true)
       console.log("response")
-      axios.post(`${adminUrl}user/login`, { ...data, identity: data.email }).then((_resp: any) => {
-        console.log(_resp)
+      axios.post(`${adminUrl}user/login`, { ...data, identity: data.email.trim() }).then((_resp: any) => {
         if (_resp.data.status) {
           messageApi.success(_resp.data.message)
           localStorage.setItem("token", _resp.data.token)
