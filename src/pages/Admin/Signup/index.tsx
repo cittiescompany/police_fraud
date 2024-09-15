@@ -285,7 +285,7 @@ const AdminSignup = (): JSX.Element => {
                                 </div>
                             </> :
                             null}
-                    <button className={`${Style.button} mt-4 mx-auto block`} onClick={() => { handleOk() }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Send OTP</button>
+                    <button className={`${Style.button} mt-4 mx-auto block`} onClick={() => { handleOk() }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>{open == 1 ? "Send OTP" : "Submit"}</button>
                 </Modal>
 
             </main>

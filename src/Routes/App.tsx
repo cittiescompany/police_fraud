@@ -13,6 +13,8 @@ import Dashboard from "../pages/Admin/Dashboard";
 import Verify from "../pages/Admin/Verify";
 import BankAccount from "../pages/Admin/BankAccount";
 import Court from "../pages/Admin/Court";
+import BankStatement from "../pages/Admin/BankStatement";
+import WarantArrest from "../pages/Admin/WarantArrest";
 
 const App = () => {
 
@@ -30,6 +32,8 @@ const App = () => {
           <Route path="verify" element={<Verify />} />
           <Route path="bank-account" element={<BankAccount />} />
           <Route path="court" element={<Court />} />
+          <Route path="bank-statement" element={<BankStatement />} />
+          <Route path="warant-arrest" element={<WarantArrest />} />
 
 
 
