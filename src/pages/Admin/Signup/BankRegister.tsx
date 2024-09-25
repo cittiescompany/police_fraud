@@ -88,172 +88,172 @@ const BankRegister = (): JSX.Element => {
 
             <main className='z-50' style={{ width: '', overflow: 'hidden' }}  >
                 {contextHolder}
-                {/* <SwitchTransition mode="out-in">
+                <SwitchTransition mode="out-in">
                     <CSSTransition
                         key={state}
                         key={state ? 'first' : 'second'}
                         timeout={300}
                         classNames="slide"
-                    > */}
-                {state ? <div>
-                    <h1 className=' text-lg text-center text-blue-400'>Register Now</h1>
-                    <div className="inputBox mb-0"
-                        style={{
-                            borderColor: formik.touched?.firstname ? formik.errors?.firstname ? "red" : '' : ''
-                        }}  >
-                        <input required={true}
-                            name='firstname'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+                    >
+                        {state ? <div>
+                            <h1 className=' text-lg text-center text-blue-400'>Register Now</h1>
+                            <div className="inputBox mb-0"
+                                style={{
+                                    borderColor: formik.touched?.firstname ? formik.errors?.firstname ? "red" : '' : ''
+                                }}  >
+                                <input required={true}
+                                    name='firstname'
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
 
-                            type="text" className='text-dark'
-                        />
-                        <span>First Name</span>
-                    </div>
-                    <span className='text-danger text-center' style={{
-                        fontSize: '0.85rem',
-                        display: formik.touched?.firstname ? formik.errors?.firstname ? 'block' : 'none' : 'none'
-                    }}>{formik.errors.firstname}</span>
-
-
-                    <div className="inputBox mb-0  mt-3"
-                        style={{
-                            borderColor: formik.touched?.lastname ? formik.errors?.lastname ? "red" : '' : ''
-                        }}  >
-                        <input required={true}
-                            name='lastname'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            type="text" className='text-dark'
-                        />
-                        <span>Last Name</span>
-                    </div>
-                    <span className='text-danger text-center' style={{
-                        fontSize: '0.85rem',
-                        display: formik.touched?.lastname ? formik.errors?.lastname ? 'block' : 'none' : 'none'
-                    }}>{formik.errors.lastname}</span>
+                                    type="text" className='text-dark'
+                                />
+                                <span>First Name</span>
+                            </div>
+                            <span className='text-danger text-center' style={{
+                                fontSize: '0.85rem',
+                                display: formik.touched?.firstname ? formik.errors?.firstname ? 'block' : 'none' : 'none'
+                            }}>{formik.errors.firstname}</span>
 
 
-                    <div className="inputBox mb-0  mt-3"
-                        style={{
-                            borderColor: formik.touched?.email ? formik.errors?.email ? "red" : '' : ''
-                        }}  >
-                        <input required={true}
-                            name='email'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            type="email" className='text-dark'
-                        />
-                        <span>Email address</span>
-                    </div>
-                    <span className='text-danger text-center' style={{
-                        fontSize: '0.85rem',
-                        display: formik.touched?.email ? formik.errors?.email ? 'block' : 'none' : 'none'
-                    }}>{formik.errors.email}</span>
+                            <div className="inputBox mb-0  mt-3"
+                                style={{
+                                    borderColor: formik.touched?.lastname ? formik.errors?.lastname ? "red" : '' : ''
+                                }}  >
+                                <input required={true}
+                                    name='lastname'
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    type="text" className='text-dark'
+                                />
+                                <span>Last Name</span>
+                            </div>
+                            <span className='text-danger text-center' style={{
+                                fontSize: '0.85rem',
+                                display: formik.touched?.lastname ? formik.errors?.lastname ? 'block' : 'none' : 'none'
+                            }}>{formik.errors.lastname}</span>
 
 
-                    <div className="inputBox mb-0 mt-3"
-                        style={{
-                            borderColor: formik.touched?.phonenumber ? formik.errors?.phonenumber ? "red" : '' : ''
-                        }}  >
-                        <input required={true}
-                            name='phonenumber'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            type="text" className='text-dark'
-                        />
-                        <span>Phone Number</span>
-                    </div>
-                    <span className='text-danger text-center' style={{
-                        fontSize: '0.85rem',
-                        display: formik.touched?.phonenumber ? formik.errors?.phonenumber ? 'block' : 'none' : 'none'
-                    }}>{formik.errors.phonenumber}</span>
+                            <div className="inputBox mb-0  mt-3"
+                                style={{
+                                    borderColor: formik.touched?.email ? formik.errors?.email ? "red" : '' : ''
+                                }}  >
+                                <input required={true}
+                                    name='email'
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    type="email" className='text-dark'
+                                />
+                                <span>Email address</span>
+                            </div>
+                            <span className='text-danger text-center' style={{
+                                fontSize: '0.85rem',
+                                display: formik.touched?.email ? formik.errors?.email ? 'block' : 'none' : 'none'
+                            }}>{formik.errors.email}</span>
 
-                    <div className="inputBox mb-0  mt-3 p-0 ">
-                        <FormControl
-                            sx={{
-                                border: 'none'
-                            }}
-                            fullWidth size="small" >
-                            <InputLabel id="demo-select-small-label" className='bg-white ' sx={{
-                                zIndex: 9999
-                            }}>Banks</InputLabel>
-                            <Select
-                                labelId="demo-select-small-label"
-                                id="demo-select-small"
-                                label="Bank"
-                                sx={{
-                                    border: 'none'
-                                }}
-                                name='bank'
-                                className='py-1'
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            >
-                                {
-                                    data?.data?.map((val: any, index: number) => (
-                                        <MenuItem value={val.name} key={val.name}>{val.name}</MenuItem>
-                                    ))
+
+                            <div className="inputBox mb-0 mt-3"
+                                style={{
+                                    borderColor: formik.touched?.phonenumber ? formik.errors?.phonenumber ? "red" : '' : ''
+                                }}  >
+                                <input required={true}
+                                    name='phonenumber'
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    type="text" className='text-dark'
+                                />
+                                <span>Phone Number</span>
+                            </div>
+                            <span className='text-danger text-center' style={{
+                                fontSize: '0.85rem',
+                                display: formik.touched?.phonenumber ? formik.errors?.phonenumber ? 'block' : 'none' : 'none'
+                            }}>{formik.errors.phonenumber}</span>
+
+                            <div className="inputBox mb-0  mt-3 p-0 ">
+                                <FormControl
+                                    sx={{
+                                        border: 'none'
+                                    }}
+                                    fullWidth size="small" >
+                                    <InputLabel id="demo-select-small-label" className='bg-white ' sx={{
+                                        zIndex: 9999
+                                    }}>Banks</InputLabel>
+                                    <Select
+                                        labelId="demo-select-small-label"
+                                        id="demo-select-small"
+                                        label="Bank"
+                                        sx={{
+                                            border: 'none'
+                                        }}
+                                        name='bank'
+                                        className='py-1'
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                    >
+                                        {
+                                            data?.data?.map((val: any, index: number) => (
+                                                <MenuItem value={val.name} key={val.name}>{val.name}</MenuItem>
+                                            ))
+                                        }
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <span className='text-danger text-center' style={{
+                                fontSize: '0.85rem',
+                                display: formik.touched?.bank ? formik.errors?.bank ? 'block' : 'none' : 'none'
+                            }}>{formik?.errors?.bank}</span>
+
+                            <div className="inputBox mb-0 mt-3"
+                                style={{
+                                    borderColor: formik.touched?.password ? formik.errors?.password ? "red" : '' : ''
+                                }}  >
+                                <input required={true}
+                                    name='password'
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    type="text" className='text-dark'
+                                />
+                                <span>Password</span>
+                            </div>
+                            <span className='text-danger text-center' style={{
+                                fontSize: '0.85rem',
+                                display: formik.touched?.password ? formik.errors?.password ? 'block' : 'none' : 'none'
+                            }}>{formik.errors.password}</span>
+
+                            <button className={`${Style.button} mt-4`} onClick={() => {
+                                formik.handleSubmit()
+                            }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Continue</button>
+                            <main>
+                                <p className='text-[0.8rem]'>Already have an account? <Link to='/?state=bank'>Login here</Link></p>
+                            </main>
+                        </div> : <div>
+                            <h1 className=' text-lg text-center text-blue-400'>ENTER THE OTP SENT YOUR EMAIL ADDRESS</h1>
+                            <div className="inputBox mb-0"
+                                style={{
+                                    borderColor: formik.touched?.firstname ? formik.errors?.firstname ? "red" : '' : ''
+                                }}  >
+                                <input required={true}
+                                    value={otp}
+                                    onChange={(e: any) => setOtp(e.target.value)}
+                                    type="text" className='text-dark'
+                                />
+                                <span>OTP</span>
+                            </div>
+                            <span className='text-danger text-center' style={{
+                                fontSize: '0.85rem',
+                                display: formik.touched?.firstname ? formik.errors?.firstname ? 'block' : 'none' : 'none'
+                            }}>{formik.errors.firstname}</span>
+                            <button className={`${Style.button} mt-4`} onClick={() => {
+                                if (!otp) {
+                                    message.error("OTP is INVALID")
+                                } else {
+
+                                    makeRequest({ ...newData, otp })
                                 }
-                            </Select>
-                        </FormControl>
-                    </div>
-                    <span className='text-danger text-center' style={{
-                        fontSize: '0.85rem',
-                        display: formik.touched?.bank ? formik.errors?.bank ? 'block' : 'none' : 'none'
-                    }}>{formik?.errors?.bank}</span>
-
-                    <div className="inputBox mb-0 mt-3"
-                        style={{
-                            borderColor: formik.touched?.password ? formik.errors?.password ? "red" : '' : ''
-                        }}  >
-                        <input required={true}
-                            name='password'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            type="text" className='text-dark'
-                        />
-                        <span>Password</span>
-                    </div>
-                    <span className='text-danger text-center' style={{
-                        fontSize: '0.85rem',
-                        display: formik.touched?.password ? formik.errors?.password ? 'block' : 'none' : 'none'
-                    }}>{formik.errors.password}</span>
-
-                    <button className={`${Style.button} mt-4`} onClick={() => {
-                        formik.handleSubmit()
-                    }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Continue</button>
-                    <main>
-                        <p className='text-[0.8rem]'>Already have an account? <Link to='/?state=bank'>Login here</Link></p>
-                    </main>
-                </div> : <div>
-                    <h1 className=' text-lg text-center text-blue-400'>ENTER THE OTP SENT YOUR EMAIL ADDRESS</h1>
-                    <div className="inputBox mb-0"
-                        style={{
-                            borderColor: formik.touched?.firstname ? formik.errors?.firstname ? "red" : '' : ''
-                        }}  >
-                        <input required={true}
-                            value={otp}
-                            onChange={(e: any) => setOtp(e.target.value)}
-                            type="text" className='text-dark'
-                        />
-                        <span>OTP</span>
-                    </div>
-                    <span className='text-danger text-center' style={{
-                        fontSize: '0.85rem',
-                        display: formik.touched?.firstname ? formik.errors?.firstname ? 'block' : 'none' : 'none'
-                    }}>{formik.errors.firstname}</span>
-                    <button className={`${Style.button} mt-4`} onClick={() => {
-                        if (!otp) {
-                            message.error("OTP is INVALID")
-                        } else {
-
-                            makeRequest({ ...newData, otp })
-                        }
-                    }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Continue</button>
-                </div>}
-                {/* </CSSTransition>
-                </SwitchTransition> */}
+                            }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>Continue</button>
+                        </div>}
+                    </CSSTransition>
+                </SwitchTransition>
             </main >
         </section >
     )
