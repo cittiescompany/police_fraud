@@ -59,20 +59,20 @@ const AdminSignup = (): JSX.Element => {
       <main className='relative rounded-md' style={{ overflow: 'hidden' }}>
 
         {contextHolder}
-        <SwitchTransition mode="out-in">
+        {/* <SwitchTransition mode="out-in">
           <CSSTransition
             key={alignment == "police" ? 'first' : 'second'}
             timeout={300}
             classNames="slide"
-          >
-            <>
-              <img src={alignment == 'police' ? '/assets/police.jpg' : '/assets/bankOfficer.jpg'} alt='newImage' className={`rounded min-h-[420px] my-auto absolute ${alignment == 'bank' ? 'top-5' : ''}`} />
-              <h1 className="text-3xl absolute top-[40%] max-sm:text-[1.2rem] right-[25%] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 mb-4">
-                {alignment == 'police' ? 'War against Crime' : "Bank complaint Officer"}
-              </h1>
-            </>
-          </CSSTransition>
-        </SwitchTransition>
+          > */}
+        <>
+          <img src={alignment == 'police' ? '/assets/police.jpg' : '/assets/bankOfficer.jpg'} alt='newImage' className={`rounded min-h-[420px] my-auto absolute ${alignment == 'bank' ? 'top-5' : ''}`} />
+          <h1 className="text-3xl absolute top-[40%] max-sm:text-[1.2rem] right-[25%] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 mb-4">
+            {alignment == 'police' ? 'War against Crime' : "Bank complaint Officer"}
+          </h1>
+        </>
+        {/* </CSSTransition>
+        </SwitchTransition> */}
       </main>
       <main className='mt-3 z-50' style={{ width: '', overflow: 'hidden' }}>
 
