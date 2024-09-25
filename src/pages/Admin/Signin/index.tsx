@@ -98,61 +98,61 @@ const AdminSignup = (): JSX.Element => {
             }}
             value="bank" className='lt-417:text-[0.6rem]'>bank complaint officer</ToggleButton>
         </ToggleButtonGroup>
-        <SwitchTransition mode="out-in">
+        {/* <SwitchTransition mode="out-in">
           <CSSTransition
             key={alignment == "police" ? 'first' : 'second'}
             timeout={300}
             classNames="slide"
-          >
-            <div>
-              <div className="inputBox mb-0  mt-3"
-                style={{
-                  borderColor: formik.touched?.email ? formik.errors?.email ? "red" : '' : ''
-                }}  >
-                <input required={true}
-                  name='email'
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  type="text" className='text-dark'
-                />
-                <span>Email</span>
-              </div>
-              <span className='text-danger text-center' style={{
-                fontSize: '0.85rem',
-                display: formik.touched?.email ? formik.errors?.email ? 'block' : 'none' : 'none'
-              }}>{formik.errors.email}</span>
+          > */}
+        <div>
+          <div className="inputBox mb-0  mt-3"
+            style={{
+              borderColor: formik.touched?.email ? formik.errors?.email ? "red" : '' : ''
+            }}  >
+            <input required={true}
+              name='email'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="text" className='text-dark'
+            />
+            <span>Email</span>
+          </div>
+          <span className='text-danger text-center' style={{
+            fontSize: '0.85rem',
+            display: formik.touched?.email ? formik.errors?.email ? 'block' : 'none' : 'none'
+          }}>{formik.errors.email}</span>
 
-              <div className="inputBox mb-0 mt-3"
-                style={{
-                  borderColor: formik.touched?.password ? formik.errors?.password ? "red" : '' : ''
-                }}  >
-                <input required={true}
-                  name='password'
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  type="text" className='text-dark'
-                />
-                <span>Password</span>
-              </div>
-              <span className='text-danger text-center' style={{
-                fontSize: '0.85rem',
-                display: formik.touched?.password ? formik.errors?.password ? 'block' : 'none' : 'none'
-              }}>{formik.errors.password}</span>
+          <div className="inputBox mb-0 mt-3"
+            style={{
+              borderColor: formik.touched?.password ? formik.errors?.password ? "red" : '' : ''
+            }}  >
+            <input required={true}
+              name='password'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="text" className='text-dark'
+            />
+            <span>Password</span>
+          </div>
+          <span className='text-danger text-center' style={{
+            fontSize: '0.85rem',
+            display: formik.touched?.password ? formik.errors?.password ? 'block' : 'none' : 'none'
+          }}>{formik.errors.password}</span>
 
-              <button className={`${Style.button} mt-4`} onClick={() => {
-                formik.handleSubmit()
-              }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>submit</button>
-              <main>
-                <p className='text-[0.8rem]'>
-                  Dont have an account? <Link to={`/signup/${alignment == "bank" ? "bank" : ''}`}>Sign up</Link>
-                </p>
-                <p className='text-[0.8rem]'>
-                  <Link to="/forgot-password">Forget Password?</Link>
-                </p>
-              </main>
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
+          <button className={`${Style.button} mt-4`} onClick={() => {
+            formik.handleSubmit()
+          }} disabled={loading} style={{ opacity: loading ? '0.5' : "1" }}>submit</button>
+          <main>
+            <p className='text-[0.8rem]'>
+              Dont have an account? <Link to={`/signup/${alignment == "bank" ? "bank" : ''}`}>Sign up</Link>
+            </p>
+            <p className='text-[0.8rem]'>
+              <Link to="/forgot-password">Forget Password?</Link>
+            </p>
+          </main>
+        </div>
+        {/* </CSSTransition>
+        </SwitchTransition> */}
       </main>
     </section >
   )
