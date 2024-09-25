@@ -90,7 +90,8 @@ const BankRegister = (): JSX.Element => {
                 {contextHolder}
                 <SwitchTransition mode="out-in">
                     <CSSTransition
-                        key={state}
+                        // key={state}
+                        key={state ? 'first' : 'second'}
                         timeout={300}
                         classNames="slide"
                     >

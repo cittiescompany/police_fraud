@@ -61,7 +61,7 @@ const AdminSignup = (): JSX.Element => {
         {contextHolder}
         <SwitchTransition mode="out-in">
           <CSSTransition
-            key={alignment == "police"}
+            key={alignment == "police" ? 'first' : 'second'}
             timeout={300}
             classNames="slide"
           >
@@ -100,7 +100,7 @@ const AdminSignup = (): JSX.Element => {
         </ToggleButtonGroup>
         <SwitchTransition mode="out-in">
           <CSSTransition
-            key={alignment == "police"}
+            key={alignment == "police" ? 'first' : 'second'}
             timeout={300}
             classNames="slide"
           >
