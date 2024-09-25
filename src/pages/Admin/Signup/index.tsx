@@ -31,7 +31,7 @@ const AdminSignup = (): JSX.Element => {
             if (!otpAndDirect.directLineRank) return messageApi.warning("Direct manager rank is required")
             if (!otpAndDirect.directLineName) return messageApi.warning("Direct manager name is required")
             if (!otpAndDirect.directLineEmail) return messageApi.warning("Direct manager email is required")
-            // if (!officialEmailPattern.test(otpAndDirect.directLineEmail)) return messageApi.warning("Direct manager email must be an official email")
+            if (!officialEmailPattern.test(otpAndDirect.directLineEmail)) return messageApi.warning("Direct manager email must be an official email")
         }
         try {
             setLoading(true)
@@ -75,7 +75,7 @@ const AdminSignup = (): JSX.Element => {
                 });
                 return
             };
-            setNewData({ last_name: data.lastname, first_name: data.firstname, email: data.email, phone: data.phonenumber, password: data.password, })
+            setNewData({ isOfficer: true, last_name: data.lastname, first_name: data.firstname, email: data.email, phone: data.phonenumber, password: data.password, })
             setOpen(1)
         },
         validationSchema: yup.object({

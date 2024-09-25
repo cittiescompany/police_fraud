@@ -9,6 +9,7 @@ import { FaSignOutAlt } from "react-icons/fa"
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
+import { useSelector } from 'react-redux';
 
 
 interface obj { text: string, icons: any, link: string, click?: any }
@@ -32,10 +33,15 @@ const data = [
   { text: "Health (Hospital)", icons: <FaBriefcase size={20} />, link: "/admin/health-hospital" },
   { text: "Cell Daily attendance", icons: <FaBriefcase size={20} />, link: "/admin/daily-attendance" }
 ];
+const data1 = [
+  { text: 'Document verification', icons: <GrProjects size={20} />, link: "/admin/dashboard" },
+
+];
 
 
 
 const LargeScreenSidebar = ({ toggle }: any) => {
+
   return (
     <nav className={`${Style.Navbar} bg-[#FFFFFF] w-full max-h-screen overflow-y-scroll shadow pb-[30px] -webkit-scrollbar:w-[20px]`}>
       <Links toggle={toggle} />
@@ -53,11 +59,13 @@ const activeStyle = (isActive: boolean) => ({
 })
 
 export const Links = ({ toggle, }: any) => {
+  const { admin } = useSelector((state: any) => state.admin)
+  console.log(admin)
 
   return (
     <main className='m-h-[90%] w-full list-none flex flex-col gap-1'>
 
-      {data.map((item: obj, index: number) =>
+      {(admin.isOfficer ? data : data1).map((item: obj, index: number) =>
         <button data-bs-dismiss="offcanvas" id={Style.linkButton} onClick={() => item.click ? item.click() : undefined} key={index} aria-label="Close" className='hover:bg-[blue]  hover:text-[#fff] border-2  text-[0.8rem] m-h-[10%] bg-[#FAFAFA] px-5 py-1 md:p-5 '>
           <NavLink to={item.link} className='w-full grid no-underline py-3 md:py-4  text-xs grid-cols-[20%_80%]  text-transparent  font-normal bg-transparent' style={({ isActive }) => activeStyle(isActive)} key={index} >
             <span data-bs-dismiss="offcanvas" aria-label="Close">

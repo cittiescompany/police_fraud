@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import AddToHomeScreen from '../components/AddHomeComp';
 import '../App.css'
 import AdminSignup from "../pages/Admin/Signup";
+import BankRegister from "../pages/Admin/Signup/BankRegister";
 import AdminSignin from "../pages/Admin/Signin";
 import AdminForgetPassword from "../pages/Admin/ForgetPassword";
 import AdminNewpassword from "../pages/Admin/Newpassword";
@@ -22,6 +23,7 @@ const App = () => {
     <>
       <Routes >
         <Route path="/signup" element={<AdminSignup />} />
+        <Route path="/signup/bank" element={<BankRegister />} />
         <Route path="/" element={<AdminSignin />} />
 
         {/* <Route path="forgot-password" element={<AdminForgetPassword />} />
