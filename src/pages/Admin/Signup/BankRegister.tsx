@@ -93,8 +93,6 @@ const BankRegister = (): JSX.Element => {
                         key={state ? 'first' : 'second'}
                         timeout={300}
                         classNames="slide"
-
-
                     >
                         {state ? <div>
                             <h1 className=' text-lg text-center text-blue-400'>Register Now</h1>
