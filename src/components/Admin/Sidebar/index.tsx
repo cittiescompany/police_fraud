@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 interface obj { text: string, icons: any, link: string, click?: any }
 
 const data = [
+  { text: "New petition approval console", icons: <FaBriefcase size={20} />, link: "/admin/dashboard/new-petition" },
   { text: 'Document verification', icons: <GrProjects size={20} />, link: "/admin/dashboard/verify" },
   { text: "Bank account validation", icons: <FaBriefcase size={20} />, link: "/admin/dashboard/bank-account" },
   { text: "Post No Debit Request", icons: <FaBriefcase size={20} />, link: "/admin/dashboard/court" },
@@ -22,7 +23,6 @@ const data = [
   { text: "Phone call log", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
   { text: "Arrest warrant", icons: <FaBriefcase size={20} />, link: "/admin/dashboard/warant-arrest" },
   { text: "Whatsapp family and friends", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
-  { text: "New petition approval console", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
   { text: "Social media tracking", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
   { text: "Conference (Zoom) meeting with officers", icons: <FaBriefcase size={20} />, link: "/admin/dashboard" },
   { text: "Legal console", icons: <FaBriefcase size={20} />, link: "/admin/legal-console" },
@@ -35,7 +35,6 @@ const data = [
 ];
 const data1 = [
   { text: 'Document verification', icons: <GrProjects size={20} />, link: "/admin/dashboard" },
-
 ];
 
 
