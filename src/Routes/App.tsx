@@ -16,6 +16,7 @@ import BankAccount from "../pages/Admin/BankAccount";
 import Court from "../pages/Admin/Court";
 import BankStatement from "../pages/Admin/BankStatement";
 import WarantArrest from "../pages/Admin/WarantArrest";
+import NewPetition from '../pages/Admin/NewPetition';
 
 const App = () => {
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="court" element={<Court />} />
           <Route path="bank-statement" element={<BankStatement />} />
           <Route path="warant-arrest" element={<WarantArrest />} />
+          <Route path="new-petition" element={<NewPetition />} />
 
 
 
