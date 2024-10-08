@@ -4,7 +4,8 @@ export let imageURl: string = '';
 
 
 if (process.env.NODE_ENV === "production") {
-    imageURl = 'https://police-fraud-backend.vercel.app/';
+    // imageURl = 'https://police-fraud-backend.vercel.app/';
+    imageURl = 'https://police-fraud-backend.onrender.com/';
     backendUrl = imageURl + 'api/';
     url = 'https://citties.vercel.app/'
     url = 'https://backend.cittis.co/'
