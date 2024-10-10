@@ -1,66 +1,167 @@
-import React, { useState } from 'react'
-import { Modal, Button } from "antd"
+import React, { useEffect, useState } from "react";
+import { Modal, Button } from "antd";
+import { useGetData } from "../../../content";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import axios from "axios";
+import { message } from "antd";
+import { adminUrl } from "../../../BackendUrl";
 
 const BankAccount = () => {
-    const [open, setOpen] = useState("")
-    return (
-        <section className='container'>
-            <div className='text-center text-xl text-slate-950 '>
-                Kindly confirm you have below documents
-            </div>
-            <ol className='mt-4 mx-auto w-50 gap-2' type='1' >
-                <li>
-                    court order from federal high court.
-                </li>
-                <li>
-                    Petition signed by Commissioner of Police.
-                </li>
-            </ol>
+  const [open, setOpen] = useState("");
+  const [data] = useGetData(`https://api.paystack.co/bank`);
+  const [acctName, setAcctName] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
+  const [state, setState] = useState<any>({
+    nin: "",
+    file: "",
+    acct: "",
+    bank: "",
+  });
+  const handleChange = ({ target }: any) =>
+    setState((preva: any) => ({ ...preva, [target.name]: target.name=='file'?target.files[0]:target.value }));
+  useEffect(() => {
+    if (state.acct && state.acct.length > 9 && state.bank) {
+      setAcctName("");
+      verifyAccountNumber(state.acct, state.bank).then((res) => {
+        if (res) {
+          setAcctName(res.account_name);
+        } else {
+          message.error("Invalid account number");
+        }
+      });
+    }
+  }, [state.acct, state.bank]);
 
-            <div>
-                <div className="flex flex-wrap items-center justify-center mt-3 h-full space-y-2 sm:space-y-0">
-                    <button
-                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2 mb-2 w-full sm:w-auto"
-                        type="button"
-                        onClick={() => setOpen("Court-Order")}
-                    >
-                        Court Order
-                    </button>
+  const handleSubmit=()=>{
+    try{
+        const form =new FormData()
+        Object.entries({...state,acct_name:acctName,bankData:data.data.find((val:any)=>val.code==state.bank)}).map(([key,val]:any)=>{
+            form.set(key,val)
+        })
+        axios.post(`${adminUrl}`)
 
-                    <button
-                        className="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-400/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2 mb-2 w-full sm:w-auto"
-                        type="button"
-                        onClick={() => setOpen("Petition")}
-                    >
-                        Petition
-                    </button>
-                </div>
+    }catch(err){
 
-
-            </div>
-
-            <Modal
-                title={`Upload ${open.split("-").join(" ")}`}
-                open={!!open}
-                closable={true}
-                onCancel={() => setOpen("")}
-                footer={[
-                ]}
+    }
+  }
+  return (
+    <section className="container">
+      {contextHolder}
+      <form
+        className="w-full md:w-3/5 mx-auto bg-white  sm:p-8 rounded-lg shadow-md  p-4"
+        style={{
+          boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
+        }}
+      >
+        <div className="text-center">New Post No Debit Request</div>
+        <div className="inputBox mb-0 mt-3">
+          <input
+            name="password"
+            type="file"
+            onChange={handleChange}
+            onWheel={(e: any) => e.target.blur()}
+            className="text-dark"
+          />
+          <span>Court Order</span>
+        </div>
+        <div className="inputBox mb-0 mt-3">
+          <input
+            name="nin"
+            type="text"
+            onWheel={(e: any) => e.target.blur()}
+            onChange={handleChange}
+            className="text-dark"
+          />
+          <span>NIN</span>
+        </div>
+        <div className="inputBox mb-0  mt-3 p-0 ">
+          <FormControl
+            sx={{
+              border: "none",
+            }}
+            fullWidth
+            size="small"
+          >
+            <InputLabel
+              id="demo-select-small-label"
+              className="bg-white "
+              sx={{
+                zIndex: 9999,
+              }}
             >
+              Bank name
+            </InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-small"
+              label="Department"
+              sx={{
+                border: "none",
+              }}
+              name="bank"
+              onChange={handleChange}
+              className="py-1"
+            >
+              {data?.data?.map((val: any, index: number) => (
+                <MenuItem value={val.code} key={val.name}>
+                  {val.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className="inputBox mb-0 mt-3">
+          <input
+            name="acct"
+            type="text"
+            onChange={handleChange}
+            onWheel={(e: any) => e.target.blur()}
+            className="text-dark"
+          />
+          <span>Account Number</span>
+        </div>
+        {acctName && (
+          <div className="text-center">
+            <span>Account Name : </span>
+            <span>{acctName}</span>
+          </div>
+        )}
 
-                <div className="inputBox mb-0 mt-3"  >
-                    <input name='password' type="file" onWheel={(e: any) => e.target.blur()} className='text-dark'
-                    />
-                    <span>value</span>
-                </div>
-                <Button type="primary" className='mt-2 mx-auto block' size={"large"}>
-                    Submit
-                </Button>
+        <button
+          type="submit"
+          className="w-full mt-3 bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+        >
+          Submit
+        </button>
+      </form>
+    </section>
+  );
+};
 
-            </Modal>
+export default BankAccount;
 
-        </section>
-    )
+async function verifyAccountNumber(accountNumber: any, bankCode: any) {
+  const paystackSecretKey = "YOUR_SECRET_KEY"; // Replace with your actual Paystack secret key
+
+  try {
+    const response = await axios.get("https://api.paystack.co/bank/resolve", {
+      params: {
+        account_number: accountNumber,
+        bank_code: bankCode,
+      },
+      headers: {
+        Authorization: `Bearer sk_test_23bcb06d0d26a28b8216016fde2e30b64211922f`,
+      },
+    });
+
+    if (response.data.status) {
+      console.log("Account verified:", response.data.data);
+      return response.data.data;
+    } else {
+      console.log("Verification failed:", response.data.message);
+      return null;
+    }
+  } catch (error) {
+    return null;
+  }
 }
-
-export default BankAccount

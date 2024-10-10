@@ -228,16 +228,17 @@ const NewPetition = () => {
             <tbody className="divide-y divide-gray-200">
               {allData&&allData?.map((val:any,index:any)=>(
               <tr className="hover:bg-gray-50">
-                <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">{index}</td>
+                <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">{getFullDateTime(val.date)}</td>
                 <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">{val.Id}</td>
+                <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
+                 {val.department}
+                </td>
                 <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
                  {val.amount}
                 </td>
+                
                 <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                  petition
-                </td>
-                <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                  petition
+                  view petition
                 </td>
                 <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">{val.approved==1?"True":'False'}</td>
                 <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">download</td>
@@ -310,3 +311,26 @@ function FileUpload({ handleFile }: any) {
     </div>
   );
 }
+
+
+function getFullDateTime(data:any) {
+  const now = new Date(data);
+  
+  const day = String(now.getDate()).padStart(2, '0');  // Day of the month (01-31)
+  const month = String(now.getMonth() + 1).padStart(2, '0');  // Months are zero-indexed (01-12)
+  const year = now.getFullYear();  // Full year (e.g., 2024)
+  
+  const hours = String(now.getHours()).padStart(2, '0');  // Hours (00-23)
+  const minutes = String(now.getMinutes()).padStart(2, '0');  // Minutes (00-59)
+  const seconds = String(now.getSeconds()).padStart(2, '0');  // Seconds (00-59)
+  
+  const formattedDate = `${day}-${month}-${year}`;  // e.g., 10/10/2024
+  const formattedTime = `${hours}:${minutes}:${seconds}`;  // e.g., 14:30:15
+  
+  return `${formattedDate} ${formattedTime}`;  // e.g., 10/10/2024 14:30:15
+}
+
+
+
+
+
