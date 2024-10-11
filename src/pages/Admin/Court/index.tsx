@@ -72,7 +72,7 @@ const BankAccount = () => {
             onChange={handleChange}
             className="text-dark"
           />
-          <span>NIN</span>
+          <span>Suit number</span>
         </div>
         <div className="inputBox mb-0  mt-3 p-0 ">
           <FormControl
