@@ -385,8 +385,7 @@ const ThreeDotMenu = () => {
       </div>
     </div>
   );
-};
-
+}
 const Button = ({ onClick, isDownload }: any) => {
   if (isDownload) {
     return (
