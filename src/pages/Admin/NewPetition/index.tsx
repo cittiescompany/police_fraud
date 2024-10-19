@@ -251,7 +251,7 @@ const NewPetition = () => {
                     </td>
 
                     <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                     <Button isDownload={true} onClick={()=>{}}/>
+                      <Button isDownload={true} onClick={() => {}} />
                     </td>
                     <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
                       share
@@ -385,8 +385,9 @@ const ThreeDotMenu = () => {
       </div>
     </div>
   );
-}
-const Button = ({ onClick, isDownload }: any) => {
+};
+
+export const Button = ({ onClick, isDownload }: any) => {
   if (isDownload) {
     return (
       <button className="download-button">
