@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Modal } from "antd";
 import { Button } from "./../Admin/NewPetition";
 import { useGetData } from "./../../content";
@@ -10,20 +10,41 @@ import { adminUrl } from "./../../BackendUrl";
 const include = ["cover_letter", "court_order"];
 const className = `px-3 py-3 text-left text-[0.7rem] font-medium text-gray-600 capitalize tracking-wider`;
 const thData =
-  `Date, Court Order, Police Cover letter, Bank Name, PND Status,Comment`.split(
+  `Date,ID, Court Order, Police Cover letter, Account Number, PND Status,Action`.split(
     ","
   );
 
 const CouterOrder = () => {
   const [open, setOpen] = useState("");
-  const [data] = useGetData(`${adminUrl}user/post_no_bill/all`);
   const [acctName, setAcctName] = useState("");
   const [modalState, setModalState] = useState("");
+  const [data, setData] = useState([]);
+
+  const Fetch = async () => {
+    try {
+      const res = await axios.get(`${adminUrl}user/post_no_bill/all`);
+      setData(res.data.data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    Fetch();
+  }, []);
+  const update = async (data: any) => {
+    try {
+      const res = await axios.put(`${adminUrl}user/post_no_bill/update/`, data);
+      console.log(res.data);
+      Fetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="container">
       <div className="overflow-x-auto bg-white mt-6 shadow-md rounded-lg">
-        <table className="min-w-full table-auto">
+        <table className="min-w-full ">
           <thead className="bg-gray-200">
             <tr>
               {thData.map((val: any, index: any) => (
@@ -33,10 +54,13 @@ const CouterOrder = () => {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {data &&
-              data.data?.map((val: any, index: any) => (
+              data?.map((val: any, index: any) => (
                 <tr className="hover:bg-gray-50">
                   <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
                     {val.date}
+                  </td>
+                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
+                    {val.id}
                   </td>
                   <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
                     <Button onClick={() => setModalState(val.court_order)} />
@@ -45,15 +69,14 @@ const CouterOrder = () => {
                     <Button onClick={() => setModalState(val.cover_letter)} />
                   </td>
                   <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    {val.bank_name}
+                    {val.account_number}
                   </td>
                   <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    pending
+                    {val.status == "new" ? "new request" : "Freeze"}
                   </td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap"></td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap"></td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap"></td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap"></td>
+                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
+                    <HamburgerMenu update={update} data={val} />
+                  </td>
                 </tr>
               ))}
           </tbody>
@@ -79,4 +102,65 @@ const CouterOrder = () => {
   );
 };
 
+const HamburgerMenu = ({ update, data }: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+  const updateStatus = (e: any) => {
+    update({
+      status: e,
+      id: data.unique_id,
+    });
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="relative" ref={menuRef}>
+      <button onClick={toggleMenu} className="block  focus:outline-none">
+        <svg
+          className="w-6 h-6 text-gray-800"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 12h.01M12 12h.01M18 12h.01"
+          />
+        </svg>
+      </button>
+      {isOpen && (
+        <div className="absolute z-20 top-[-20px] right-0 bg-white shadow-lg rounded-md w-48 py-2">
+          {["Freeze", "Rejected"].map((item, index) => (
+            <button
+              onClick={() =>
+                updateStatus(item == "Freeze" ? "activated" : "rejected")
+              }
+              className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100"
+              key={index}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 export default CouterOrder;

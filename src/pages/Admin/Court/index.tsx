@@ -91,7 +91,8 @@ const BankAccount = () => {
       await axios
         .post(`${adminUrl}user/post_no_bill/create`, form)
         .then((data: any) => {
-          messageApi.success("Success");
+          console.log(data);
+          messageApi.success(data.data.message);
           Fetcher();
         })
         .catch((err: any) => {
