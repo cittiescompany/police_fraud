@@ -60,20 +60,18 @@ const BankRegister = (): JSX.Element => {
       password: "",
       bank: "",
     },
-    onSubmit: async (data) => {
-      console.log(data.bank);
-
+    onSubmit: async (datas) => {
       const createdata = {
         isOfficer: false,
-        last_name: data.lastname,
-        first_name: data.firstname,
-        email: data.email,
-        phone: data.phonenumber,
-        password: data.password,
-        directLineEmail: data.email,
+        last_name: datas.lastname,
+        first_name: datas.firstname,
+        email: datas.email,
+        phone: datas.phonenumber,
+        password: datas.password,
+        directLineEmail: datas.email,
         directLineRank: "hh",
         directLineName: "hee",
-        bank: data.data.find((val: any) => val.code == data.bank),
+        bank: data.data.find((val: any) => val.code == datas.bank),
       };
       setNewData(createdata);
       await makeRequest(createdata);
@@ -81,14 +79,14 @@ const BankRegister = (): JSX.Element => {
     validationSchema: yup.object({
       firstname: yup.string().required("First Name is required"),
       lastname: yup.string().required("Last Name is required"),
-      // email: yup.string().required("Email addres is required"),
-      email: yup
-        .string()
-        .required("Email addres is required")
-        .matches(
-          officialEmailPattern,
-          'Email must be an official Gmail address"'
-        ),
+      email: yup.string().required("Email addres is required"),
+      // email: yup
+      //   .string()
+      //   .required("Email addres is required")
+      //   .matches(
+      //     officialEmailPattern,
+      //     'Email must be an official Gmail address"'
+      //   ),
       phonenumber: yup.string().required("Phone Number is required"),
       password: yup.string().required("Password is required"),
       bank: yup.string().required("Bank is required"),
