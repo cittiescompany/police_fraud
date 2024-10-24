@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { BiSolidUserAccount } from "react-icons/bi";
 import { TbMessageReport } from "react-icons/tb";
 import { FaFlag } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 
 interface obj {
   text: string;
@@ -23,7 +24,12 @@ interface obj {
 
 const data = [
   {
-    text: "New petition approval console",
+    text: "Dashboard",
+    icons: <MdDashboard size={20} />,
+    link: "/admin/dashboard/",
+  },
+  {
+    text: "petition console",
     icons: <FaBriefcase size={20} />,
     link: "/admin/dashboard/new-petition",
   },
