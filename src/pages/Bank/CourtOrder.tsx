@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Modal } from "antd";
-import { Button } from "./../Admin/NewPetition";
+// import { Button } from "./../Admin/NewPetition";
 import { useGetData } from "./../../content";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { FcDocument } from "react-icons/fc";
 import { message } from "antd";
 import { adminUrl } from "./../../BackendUrl";
+import Table from "./Table";
 const include = ["cover_letter", "court_order"];
 const className = `px-3 py-3 text-left text-[0.7rem] font-medium text-gray-600 capitalize tracking-wider`;
 const thData =
@@ -42,46 +43,8 @@ const CouterOrder = () => {
   };
 
   return (
-    <section className="container">
-      <div className="overflow-x-auto bg-white mt-6 shadow-md rounded-lg">
-        <table className="min-w-full ">
-          <thead className="bg-gray-200">
-            <tr>
-              {thData.map((val: any, index: any) => (
-                <th className={`${className}`}>{val}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {data &&
-              data?.map((val: any, index: any) => (
-                <tr className="hover:bg-gray-50">
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    {val.date}
-                  </td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    {val.id}
-                  </td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    <Button onClick={() => setModalState(val.court_order)} />
-                  </td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    <Button onClick={() => setModalState(val.cover_letter)} />
-                  </td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    {val.account_number}
-                  </td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    {val.status == "new" ? "new request" : "Freeze"}
-                  </td>
-                  <td className="px-3 py-3 text-[0.8rem] whitespace-nowrap">
-                    <HamburgerMenu update={update} data={val} />
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+    <section>
+      <Table data={data} />
 
       <Modal
         open={!!modalState}

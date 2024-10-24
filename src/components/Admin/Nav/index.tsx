@@ -55,7 +55,7 @@ const Nav = ({ setToggle, toggle }: any) => {
               {admin.rankName} {admin.name}
             </span>
             <span className="text-muted text-[0.78rem] text-center ">
-              Time login: {formatDate(new Date(admin.timeLogin))}
+              Time login: {formatDate(new Date(admin.last_login))}
             </span>
           </div>
         </div>
