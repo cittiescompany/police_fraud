@@ -3,17 +3,15 @@ import Style from "./style.module.css";
 import { ImProfile } from "react-icons/im";
 import { GrProjects } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
-import { FaPeopleGroup } from "react-icons/fa6";
-import { FaBriefcase } from "react-icons/fa";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaPeopleGroup, FaRegFolderClosed } from "react-icons/fa6";
+import { FaBriefcase, FaSignOutAlt, FaFlag } from "react-icons/fa";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Dropdown, Space } from "antd";
 import { useSelector } from "react-redux";
 import { BiSolidUserAccount } from "react-icons/bi";
-import { TbMessageReport } from "react-icons/tb";
-import { FaFlag } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
+import { TbMessageReport, TbReportSearch } from "react-icons/tb";
+import { MdDashboard, MdOutlineNoAccounts } from "react-icons/md";
 
 interface obj {
   text: string;
@@ -30,13 +28,18 @@ const data = [
   },
   {
     text: "petition console",
-    icons: <FaBriefcase size={20} />,
+    icons: <TbReportSearch size={20} />,
     link: "/admin/dashboard/new-petition",
   },
   {
     text: "Post No Debit Request",
-    icons: <FaBriefcase size={20} />,
+    icons: <FaRegFolderClosed size={20} />,
     link: "/admin/dashboard/court",
+  },
+  {
+    text: "UnFreeze Requests",
+    icons: <MdOutlineNoAccounts size={20} />,
+    link: "/admin/dashboard/freezed",
   },
   {
     text: "Document verification",
@@ -158,7 +161,6 @@ const activeStyle = (isActive: boolean) => ({
 
 export const Links = ({ toggle }: any) => {
   const { admin } = useSelector((state: any) => state.admin);
-  console.log(admin);
 
   return (
     <main className="m-h-[90%] w-full list-none flex flex-col gap-1">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "antd";
+import { Modal, Button } from "antd";
 import { useGetData } from "../../../content";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
@@ -94,6 +94,7 @@ const BankAccount = () => {
           console.log(data);
           messageApi.success(data.data.message);
           Fetcher();
+          setModalState("");
         })
         .catch((err: any) => {
           console.log(err.message);
@@ -109,120 +110,132 @@ const BankAccount = () => {
   return (
     <section className="container">
       {contextHolder}
-      <form
-        className="w-full md:w-3/5 mx-auto bg-white  sm:p-8 rounded-lg shadow-md  p-4"
-        onSubmit={handleSubmit}
-        style={{
-          boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
-        }}
-      >
-        <div className="text-center">New Post No Debit Request</div>
-        <div className=" my-2">
-          <FileUpload
-            name={"court_order"}
-            text="Upload Court Order"
-            handleChange={handleChange}
-          />
-        </div>
-        <div className=" my-2">
-          <FileUpload
-            name={"cover_letter"}
-            text="Police cover letter"
-            handleChange={handleChange}
-          />
-        </div>
-        <div className="inputBox mb-0 mt-3">
-          <input
-            name="suit_number"
-            type="text"
-            onWheel={(e: any) => e.target.blur()}
-            onChange={handleChange}
-            className="text-dark"
-          />
-          <span>Suit number</span>
-        </div>
-        <div className="inputBox mb-0  mt-3 p-0 ">
-          <FormControl
-            sx={{
-              border: "none",
-            }}
-            fullWidth
-            size="small"
-          >
-            <InputLabel
-              id="demo-select-small-label"
-              className="bg-white "
-              sx={{
-                zIndex: 9999,
-              }}
-            >
-              Bank name
-            </InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-small"
-              label="Department"
-              sx={{
-                border: "none",
-              }}
-              name="bank"
-              onChange={handleChange}
-              className="py-1"
-            >
-              {data?.data?.map((val: any, index: number) => (
-                <MenuItem
-                  sx={{
-                    zIndex: 99999,
-                  }}
-                  value={val.code}
-                  key={val.name}
-                >
-                  {val.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-        <div className="inputBox mb-0 mt-3">
-          <input
-            name="acct"
-            type="text"
-            onChange={handleChange}
-            onWheel={(e: any) => e.target.blur()}
-            className="text-dark"
-          />
-          <span>Account Number</span>
-        </div>
-        {acctName && (
-          <div className="text-center">
-            <span>Account Name : </span>
-            <span>{acctName}</span>
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={load}
-          className="w-full mt-3 bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+      <div className="flex justify-end border-red-400 my-3">
+        <Button
+          type="primary"
+          size={"large"}
+          onClick={() => setModalState("open")}
         >
-          Submit
-        </button>
-      </form>
+          New request
+        </Button>
+      </div>
       <Table data={all} />
       <Modal
         open={!!modalState}
         closable={true}
         onCancel={() => setModalState("")}
         footer={[]}
-        width={800}
-        bodyStyle={{ height: "800px", zIndex: 100000 }}
+        width={modalState == "open" ? undefined : 750}
+        bodyStyle={modalState == "open" ? undefined : { height: "800px" }}
       >
-        <iframe
-          src={modalState}
-          width="100%"
-          height="100%"
-          title="PDF Viewer"
-        />
+        {modalState == "open" ? (
+          <form
+            className="w-full  mx-auto bg-white  sm:p-8  p-4"
+            onSubmit={handleSubmit}
+            style={{
+              boxShadow: " rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            }}
+          >
+            <div className="text-center">New Post No Debit Request</div>
+            <div className=" my-2">
+              <FileUpload
+                name={"court_order"}
+                text="Upload Court Order"
+                handleChange={handleChange}
+              />
+            </div>
+            <div className=" my-2">
+              <FileUpload
+                name={"cover_letter"}
+                text="Police cover letter"
+                handleChange={handleChange}
+              />
+            </div>
+            <div className="inputBox mb-0 mt-3">
+              <input
+                name="suit_number"
+                type="text"
+                onWheel={(e: any) => e.target.blur()}
+                onChange={handleChange}
+                className="text-dark"
+              />
+              <span>Suit number</span>
+            </div>
+            <div className="inputBox mb-0  mt-3 p-0 ">
+              <FormControl
+                sx={{
+                  border: "none",
+                }}
+                fullWidth
+                size="small"
+              >
+                <InputLabel
+                  id="demo-select-small-label"
+                  className="z-10 bg-white max-h-[20px]"
+                  sx={{
+                    zIndex: 9999,
+                  }}
+                >
+                  Bank name
+                </InputLabel>
+                <Select
+                  labelId="demo-select-small-label"
+                  id="demo-select-small"
+                  label="Department"
+                  sx={{
+                    border: "none",
+                  }}
+                  name="bank"
+                  onChange={handleChange}
+                  className="py-1"
+                >
+                  {data?.data?.map((val: any, index: number) => (
+                    <MenuItem
+                      sx={{
+                        zIndex: 99999,
+                      }}
+                      value={val.code}
+                      key={val.name}
+                    >
+                      {val.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div className="inputBox mb-0 mt-3">
+              <input
+                name="acct"
+                type="text"
+                onChange={handleChange}
+                onWheel={(e: any) => e.target.blur()}
+                className="text-dark"
+              />
+              <span>Account Number</span>
+            </div>
+            {acctName && (
+              <div className="text-center">
+                <span>Account Name : </span>
+                <span>{acctName}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={load}
+              className="w-full mt-3 bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+              Submit
+            </button>
+          </form>
+        ) : (
+          <iframe
+            src={modalState}
+            width="100%"
+            height="100%"
+            title="PDF Viewer"
+          />
+        )}
       </Modal>
     </section>
   );

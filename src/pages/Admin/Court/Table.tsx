@@ -23,11 +23,6 @@ const App: React.FC = ({ data }: any) => {
       render: (date: any) => date.split("T")[0],
     },
     {
-      title: "Case ID",
-      dataIndex: "id",
-      width: 100,
-    },
-    {
       title: "Suit Number",
       dataIndex: "suit_number",
       width: 150,
