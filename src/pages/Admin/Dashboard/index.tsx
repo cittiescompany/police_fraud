@@ -14,14 +14,12 @@ import Style from "./style.module.css";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
 import Card from "../../../components/Admin/Card";
-import { FaPeopleGroup } from "react-icons/fa6";
+import { FaPeopleGroup, FaRegFolderClosed, FaNairaSign } from "react-icons/fa6";
 import { FaUsers } from "react-icons/fa";
 import { BiAddToQueue } from "react-icons/bi";
-import { MdOutlineReport } from "react-icons/md";
+import { MdOutlineReport, MdOutlineCases } from "react-icons/md";
 import { adminUrl } from "../../../BackendUrl";
 import { useGetData } from "../../../content";
-import { MdOutlineCases } from "react-icons/md";
-import { FaNairaSign } from "react-icons/fa6";
 
 const AdminDashboard = () => {
   const { admin }: any = useSelector((state: any) => state.admin);
@@ -34,33 +32,39 @@ const AdminDashboard = () => {
             color={"#3A769E"}
             icon={<MdOutlineCases />}
             text={"Petitions"}
-            number={admin?.petition["COUNT(*)"]}
+            number={admin?.petition?.total_petitions_count}
           />
           <Card
             color={"#3A769E"}
             text={"Total Amount Of Petitions"}
             icon={<FaNairaSign />}
             number={`N ${Number(
-              admin?.total_petition_amount?.total_amount
+              admin?.petition?.total_amount
             ).toLocaleString()}`}
           />
           <Card
             color={"#3A769E"}
-            text={"Posts"}
+            text={"Post No Debit"}
+            icon={<FaRegFolderClosed />}
+            number={admin?.petition?.total_post_no_debit}
+          />
+          {/* <Card
+            color={"#3A769E"}
+            text={"Rejected Post No Debit"}
             icon={<BiAddToQueue />}
             number={0}
-          />
+            /> */}
           <Card
             color={"#3A769E"}
-            text={"Posts"}
-            icon={<BiAddToQueue />}
-            number={0}
-          />
-          <Card
-            color={"#3A769E"}
-            text={"Reports"}
+            text={"Activated Post No Debit"}
             icon={<MdOutlineReport />}
-            number={600}
+            number={admin?.petition?.total_activated_post_no_debit}
+          />
+          <Card
+            color={"#00FF9C"}
+            text={"Rejected Post No Debit"}
+            icon={<BiAddToQueue />}
+            number={admin?.petition?.total_rejected_post_no_debit}
           />
         </div>
       </main>

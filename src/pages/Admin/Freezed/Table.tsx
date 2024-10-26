@@ -3,29 +3,15 @@ import { Table, Button, Tag, Dropdown, Menu } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 
-const App: React.FC = ({ data, update }: any) => {
-  const handleClick = (id: any) => {
-    update(id);
-  };
-  const menu = (id: any) => (
+const App: React.FC = ({ data }: any) => {
+  const menu = (
     <Menu
       style={{
         padding: "10px",
       }}
     >
-      {["Freeze", "Rejected"].map((item, index) => (
-        <Menu.Item
-          onClick={() =>
-            handleClick({
-              status: item == "Freeze" ? "activated" : "rejected",
-              id: id,
-            })
-          }
-          key={index}
-        >
-          {item}
-        </Menu.Item>
-      ))}
+      <Menu.Item key="1">Delete</Menu.Item>
+      <Menu.Item key="2">Edit </Menu.Item>
     </Menu>
   );
   const columns: TableColumnsType<any> = [
@@ -35,6 +21,11 @@ const App: React.FC = ({ data, update }: any) => {
       key: "date",
       width: 120,
       render: (date: any) => date.split("T")[0],
+    },
+    {
+      title: "Case ID",
+      dataIndex: "id",
+      width: 100,
     },
     {
       title: "Suit Number",
@@ -75,7 +66,7 @@ const App: React.FC = ({ data, update }: any) => {
       key: "file",
       width: 150,
       render: (record: any) => (
-        <Button type="primary" onClick={() => state(record)} size="medium">
+        <Button type="primary" size="medium">
           View
         </Button>
       ),
@@ -86,23 +77,9 @@ const App: React.FC = ({ data, update }: any) => {
       key: "file",
       width: 150,
       render: (record: any) => (
-        <Button type="primary" onClick={() => state(record)} size="medium">
+        <Button type="primary" size="medium">
           View
         </Button>
-      ),
-    },
-    {
-      title: "Action",
-      dataIndex: "unique_id",
-      key: "unique_id",
-      render: (record: any) => (
-        <Dropdown overlay={menu(record)} trigger={["click"]}>
-          <Button
-            shape="circle"
-            icon={<EllipsisOutlined />}
-            style={{ border: "none" }}
-          />
-        </Dropdown>
       ),
     },
   ];

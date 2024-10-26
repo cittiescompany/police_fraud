@@ -35,7 +35,6 @@ const CouterOrder = () => {
   const update = async (data: any) => {
     try {
       const res = await axios.put(`${adminUrl}user/post_no_bill/update/`, data);
-      console.log(res.data);
       Fetch();
     } catch (error) {
       console.log(error);
@@ -44,7 +43,7 @@ const CouterOrder = () => {
 
   return (
     <section>
-      <Table data={data} />
+      <Table data={data} update={update} />
 
       <Modal
         open={!!modalState}
