@@ -23,7 +23,6 @@ import { useGetData } from "../../../content";
 
 const AdminDashboard = () => {
   const { admin }: any = useSelector((state: any) => state.admin);
-  console.log(admin);
   return (
     <section className="">
       <main>

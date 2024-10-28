@@ -19,6 +19,7 @@ import WarantArrest from "../pages/Admin/WarantArrest";
 import NewPetition from "../pages/Admin/NewPetition";
 import CourtOrder from "../pages/Bank/CourtOrder";
 import Freezed from "../pages/Admin/Freezed";
+import AuditTrail from "../pages/Admin/AuditTrail";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="warant-arrest" element={<WarantArrest />} />
           <Route path="freezed" element={<Freezed />} />
           <Route path="new-petition" element={<NewPetition />} />
+          <Route path="audit-trail" element={<AuditTrail />} />
           <Route path="*" element={<Navigate to="/admin/dashboard" />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />

@@ -33,7 +33,9 @@ const AdminDash = (): JSX.Element => {
     }
     if (data) {
       if (data.status) {
-        dispatch(add_admin(data?.user));
+        dispatch(
+          add_admin({ admin: data?.user, petition: data?.user?.petition })
+        );
         setState("success");
       } else {
         if (count <= 3) {

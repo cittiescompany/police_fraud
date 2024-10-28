@@ -6,6 +6,8 @@ import { message, Modal } from "antd";
 import axios from "axios";
 import conveter from "number-to-words";
 import Table from "./Table";
+import { update_petition } from "../../../Redux/Admin.slice";
+import { useSelector } from "react-redux";
 const ranges = [
   "20m-44m",
   "50m-99m",
@@ -33,6 +35,7 @@ const NewPetition = () => {
   const [state, setState] = useState<any>({ depart: "", amount: "" });
   const [load, setload] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const { petition }: any = useSelector((state: any) => state.admin);
 
   const getAllData = async () => {
     try {
@@ -50,6 +53,7 @@ const NewPetition = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    console.log(Number(state.amount));
     if (!state.depart) return message.warning("Department is required");
     if (!state.amount)
       return message.warning("Amount involved in the case is required");
@@ -58,6 +62,8 @@ const NewPetition = () => {
     Object.entries(state).map(([key, val]: any) => {
       form.set(key, val);
     });
+    const newPet = Number(petition.total_amount) + Number(state.amount);
+
     setload(true);
     await axios
       .post(`${adminUrl}user/petition/create`, form)
@@ -65,10 +71,12 @@ const NewPetition = () => {
         if (res.data.status) {
           setModalState("");
           getAllData();
+
+          update_petition(newPet);
           messageApi.success("Succesfuly created a petition");
-          Object.entries(state).map(([key, val]: any) => {
-            setState((prev: any) => ({ ...prev, [key]: "" }));
-          });
+          // Object.entries(state).map(([key, val]: any) => {
+          //   setState((prev: any) => ({ ...prev, [key]: "" }));
+          // });
         } else {
           messageApi.error("Fail to create");
         }
