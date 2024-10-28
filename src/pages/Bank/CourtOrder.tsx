@@ -43,7 +43,7 @@ const CouterOrder = () => {
 
   return (
     <section>
-      <Table data={data} update={update} />
+      <Table data={data} update={update} setState={setModalState} />
 
       <Modal
         open={!!modalState}

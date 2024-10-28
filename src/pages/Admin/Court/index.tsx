@@ -119,7 +119,7 @@ const BankAccount = () => {
           New request
         </Button>
       </div>
-      <Table data={all} />
+      <Table data={all} setState={setModalState} />
       <Modal
         open={!!modalState}
         closable={true}

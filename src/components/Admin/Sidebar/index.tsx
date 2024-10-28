@@ -12,6 +12,9 @@ import { useSelector } from "react-redux";
 import { BiSolidUserAccount } from "react-icons/bi";
 import { TbMessageReport, TbReportSearch } from "react-icons/tb";
 import { MdDashboard, MdOutlineNoAccounts } from "react-icons/md";
+import { CiLogout } from "react-icons/ci";
+import { useNavigate } from "react-router";
+import { AiOutlineAudit } from "react-icons/ai";
 
 interface obj {
   text: string;
@@ -50,6 +53,11 @@ const data = [
     text: "Bank account validation",
     icons: <FaBriefcase size={20} />,
     link: "/admin/dashboard/bank-account",
+  },
+  {
+    text: "Audit Trail",
+    icons: <AiOutlineAudit size={20} />,
+    link: "/admin/dashboard/audit-trail",
   },
   {
     text: "Bank statement",
@@ -116,6 +124,15 @@ const data = [
     icons: <FaBriefcase size={20} />,
     link: "/admin/daily-attendance",
   },
+  {
+    text: "Log Out",
+    icons: <CiLogout size={20} />,
+    link: "/admin/daily-attendance",
+    click: (nav: any) => {
+      localStorage.removeItem("Authorization");
+      nav("/admin/", { replace: true });
+    },
+  },
 ];
 const data1 = [
   {
@@ -137,6 +154,15 @@ const data1 = [
     text: "Flag Account",
     icons: <FaFlag size={20} />,
     link: "/bank/dashboard",
+  },
+  {
+    text: "Log Out",
+    icons: <CiLogout size={20} />,
+    link: "/admin/daily-attendance",
+    click: (nav: any) => {
+      localStorage.removeItem("Authorization");
+      nav("/admin/", { replace: true });
+    },
   },
 ];
 
@@ -161,6 +187,7 @@ const activeStyle = (isActive: boolean) => ({
 
 export const Links = ({ toggle }: any) => {
   const { admin } = useSelector((state: any) => state.admin);
+  const nav = useNavigate();
 
   return (
     <main className="m-h-[90%] w-full list-none flex flex-col gap-1">
@@ -168,7 +195,7 @@ export const Links = ({ toggle }: any) => {
         <button
           data-bs-dismiss="offcanvas"
           id={Style.linkButton}
-          onClick={() => (item.click ? item.click() : undefined)}
+          onClick={() => (item.click ? item.click(nav) : undefined)}
           key={index}
           aria-label="Close"
           className="hover:bg-[blue]  hover:text-[#fff] border-2  text-[0.8rem] m-h-[10%] bg-[#FAFAFA] px-5 py-1 md:p-5 "

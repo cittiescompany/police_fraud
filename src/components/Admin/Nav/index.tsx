@@ -6,7 +6,9 @@ import Avatar from "@mui/material/Avatar";
 import { useGetWindowAvailSize } from "../../../Hooks";
 
 const Nav = ({ setToggle, toggle }: any) => {
+  const { petition }: any = useSelector((state: any) => state.admin);
   const { admin }: any = useSelector((state: any) => state.admin);
+
   const { width } = useGetWindowAvailSize();
   const Func = () => setToggle(!toggle);
   return (
@@ -37,6 +39,22 @@ const Nav = ({ setToggle, toggle }: any) => {
           )}
         </button>
       </div>
+      {admin.isOfficer ? (
+        <div className=" ">
+          <div className="gap-3 flex ">
+            <span className="text-gray-500">Petition</span>
+            <span>{petition?.total_petitions_count || 0}</span>
+          </div>
+          <div className="gap-3 flex ">
+            <span className="text-gray-500">Total Amount</span>
+            <span>{`N ${Number(
+              petition?.total_amount
+            ).toLocaleString()}`}</span>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       {admin.isOfficer ? (
         <div className="flex gap-1  flex-row justify-around items-center">
           <div className="flex flex-col border p-2 rounded-md shadow-md">
