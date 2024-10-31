@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Modal } from "antd";
 // import { Button } from "./../Admin/NewPetition";
-import { useGetData } from "./../../content";
+import { useGetData } from "../../../content";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { FcDocument } from "react-icons/fc";
 import { message } from "antd";
-import { adminUrl } from "./../../BackendUrl";
+import { adminUrl } from "../../../BackendUrl";
 import Table from "./Table";
 const include = ["cover_letter", "court_order"];
 const className = `px-3 py-3 text-left text-[0.7rem] font-medium text-gray-600 capitalize tracking-wider`;
@@ -15,7 +15,7 @@ const thData =
     ","
   );
 
-const CouterOrder = () => {
+const CouterOrder = ({ status }: any) => {
   const [open, setOpen] = useState("");
   const [acctName, setAcctName] = useState("");
   const [modalState, setModalState] = useState("");
@@ -23,15 +23,18 @@ const CouterOrder = () => {
 
   const Fetch = async () => {
     try {
-      const res = await axios.get(`${adminUrl}user/post_no_bill/all`);
+      const res = await axios.get(
+        `${adminUrl}user/post_no_bill/all?type=${status ? "true" : "false"}`
+      );
       setData(res.data.data);
     } catch (error: any) {
       console.log(error);
     }
   };
   useEffect(() => {
+    setData([]);
     Fetch();
-  }, []);
+  }, [status]);
   const update = async (data: any) => {
     try {
       const res = await axios.put(`${adminUrl}user/post_no_bill/update/`, data);

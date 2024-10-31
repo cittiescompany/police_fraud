@@ -52,7 +52,7 @@ const PostNoDebit = () => {
 
   const Fetcher = async () => {
     try {
-      const res = await axios.get(`${adminUrl}user/post_no_bill/all`);
+      const res = await axios.get(`${adminUrl}user/post_no_bill/all?type=true`);
       setAll(res.data.data);
     } catch (error: any) {
       console.log(error);
@@ -83,6 +83,7 @@ const PostNoDebit = () => {
         ...state,
         acct_name: acctName,
         ...data.data.find((val: any) => val.code == state.bank),
+        type: true,
       }).map(([key, val]: any) => {
         form.set(key, val);
       });

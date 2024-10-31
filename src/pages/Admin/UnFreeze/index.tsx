@@ -9,10 +9,6 @@ import { adminUrl } from "../../../BackendUrl";
 const include = ["cover_letter", "court_order"];
 import Table from "./Table";
 const className = `px-3 py-3 text-left text-[0.7rem] font-medium text-gray-600 capitalize tracking-wider`;
-const thData =
-  `Date, Court Order, Police Cover letter, Bank Name, PND Status,Comment`.split(
-    ","
-  );
 
 const UnFreeze = () => {
   const [open, setOpen] = useState("");
@@ -52,7 +48,9 @@ const UnFreeze = () => {
 
   const Fetcher = async () => {
     try {
-      const res = await axios.get(`${adminUrl}user/post_no_bill/all`);
+      const res = await axios.get(
+        `${adminUrl}user/post_no_bill/all?type=false`
+      );
       setAll(res.data.data);
     } catch (error: any) {
       console.log(error);
@@ -83,6 +81,7 @@ const UnFreeze = () => {
         ...state,
         acct_name: acctName,
         ...data.data.find((val: any) => val.code == state.bank),
+        type: false,
       }).map(([key, val]: any) => {
         form.set(key, val);
       });

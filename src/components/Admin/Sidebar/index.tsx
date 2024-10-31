@@ -138,12 +138,12 @@ const data1 = [
   {
     text: "Post No Debit",
     icons: <GrProjects size={20} />,
-    link: "/bank/dashboard",
+    link: "/bank/dashboard/post-not-debit",
   },
   {
     text: "UnFreeze Request",
     icons: <BiSolidUserAccount size={20} />,
-    link: "/bank/dashboard",
+    link: "/bank/dashboard/unfreeze",
   },
   {
     text: "Report Fraud",
