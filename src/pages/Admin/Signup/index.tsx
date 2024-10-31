@@ -25,7 +25,11 @@ const AdminSignup = (): JSX.Element => {
         directLineName: String | any;
       }
     | any
-  >({ directLineRank: "hello", directLineEmail: "", directLineName: "ssss" });
+  >({
+    directLineRank: "hello",
+    directLineEmail: "Pa@specialfraud.org.ng",
+    directLineName: "ssss",
+  });
   const [open, setOpen] = useState(0);
   const [state, setState] = useState(true);
   const [newData, setNewData] = useState<any>({});
@@ -45,10 +49,10 @@ const AdminSignup = (): JSX.Element => {
         return messageApi.warning("Direct manager name is required");
       if (!details.directLineEmail)
         return messageApi.warning("Direct manager email is required");
-      //   if (!officialEmailPattern.test(details.directLineEmail))
-      //     return messageApi.warning(
-      //       "Direct manager email must be an official email"
-      //     );
+      if (!officialEmailPattern.test(details.directLineEmail))
+        return messageApi.warning(
+          "Direct manager email must be an official email"
+        );
     }
     try {
       setLoading(true);

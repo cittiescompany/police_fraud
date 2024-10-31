@@ -23,7 +23,7 @@ const App: React.FC = ({ data }: any) => {
       render: (date: any) => date.split("T")[0],
     },
     {
-      title: "Case ID",
+      title: " ID",
       dataIndex: "id",
       width: 100,
     },
@@ -40,7 +40,7 @@ const App: React.FC = ({ data }: any) => {
       render: (text) => <div style={{ whiteSpace: "normal" }}>{text}</div>,
     },
     {
-      title: "PND Status",
+      title: "Unfreeze Status",
       dataIndex: "status",
       key: "status",
       width: 150,
@@ -48,7 +48,7 @@ const App: React.FC = ({ data }: any) => {
         <>
           {
             <Tag color={!record || record == "rejected" ? "red" : "green"}>
-              {record || "pending"}
+              {(record == "activated" ? "Unfreeze" : record) || "pending"}
             </Tag>
           }
         </>

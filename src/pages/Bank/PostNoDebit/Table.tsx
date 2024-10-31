@@ -3,7 +3,7 @@ import { Table, Button, Tag, Dropdown, Menu } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 
-const App: React.FC = ({ data, update, setState }: any) => {
+const App: React.FC = ({ data, update, setState, status }: any) => {
   const handleClick = (id: any) => {
     update(id);
   };
@@ -13,11 +13,13 @@ const App: React.FC = ({ data, update, setState }: any) => {
         padding: "10px",
       }}
     >
-      {["Freeze", "Rejected"].map((item, index) => (
+      {[status ? "Freeze" : "Unfreeze", "Rejected"].map((item, index) => (
         <Menu.Item
           onClick={() =>
             handleClick({
-              status: item == "Freeze" ? "activated" : "rejected",
+              status: ["Freeze", "Unfreeze"].includes(item)
+                ? "activated"
+                : "rejected",
               id: id,
             })
           }
@@ -57,7 +59,8 @@ const App: React.FC = ({ data, update, setState }: any) => {
         <>
           {
             <Tag color={!record || record == "rejected" ? "red" : "green"}>
-              {record || "pending"}
+              {(record == "activated" && !status ? "Unfreeze" : record) ||
+                "pending"}
             </Tag>
           }
         </>
