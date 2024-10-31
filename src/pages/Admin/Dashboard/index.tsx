@@ -31,7 +31,7 @@ const AdminDashboard = () => {
             color={"#3A769E"}
             icon={<MdOutlineCases />}
             text={"Petitions"}
-            number={admin?.petition?.total_petitions_count}
+            number={admin?.petition?.total_petitions_count || 0}
           />
           <Card
             color={"#3A769E"}
@@ -45,25 +45,19 @@ const AdminDashboard = () => {
             color={"#3A769E"}
             text={"Post No Debit"}
             icon={<FaRegFolderClosed />}
-            number={admin?.petition?.total_post_no_debit}
+            number={admin?.petition?.total_post_no_debit || 0}
           />
-          {/* <Card
-            color={"#3A769E"}
-            text={"Rejected Post No Debit"}
-            icon={<BiAddToQueue />}
-            number={0}
-            /> */}
           <Card
             color={"#3A769E"}
             text={"Activated Post No Debit"}
             icon={<MdOutlineReport />}
-            number={admin?.petition?.total_activated_post_no_debit}
+            number={admin?.petition?.total_activated_post_no_debit || 0}
           />
           <Card
             color={"#00FF9C"}
             text={"Rejected Post No Debit"}
             icon={<BiAddToQueue />}
-            number={admin?.petition?.total_rejected_post_no_debit}
+            number={admin?.petition?.total_rejected_post_no_debit || 0}
           />
         </div>
       </main>

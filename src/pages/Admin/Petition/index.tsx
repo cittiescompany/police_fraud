@@ -116,7 +116,7 @@ const NewPetition = () => {
                 >
                   <InputLabel
                     id="demo-select-small-label"
-                    className="z-10 bg-white max-h-[20px] "
+                    className="z-10 bg-white max-h-[20px]"
                   >
                     Department
                   </InputLabel>
