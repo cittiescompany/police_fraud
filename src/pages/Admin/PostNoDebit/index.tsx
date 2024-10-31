@@ -14,7 +14,7 @@ const thData =
     ","
   );
 
-const BankAccount = () => {
+const PostNoDebit = () => {
   const [open, setOpen] = useState("");
   const [data] = useGetData(`https://api.paystack.co/bank`);
   const [acctName, setAcctName] = useState("");
@@ -30,7 +30,6 @@ const BankAccount = () => {
     acct_name: "",
   });
   const handleChange = ({ target }: any) => {
-    console.log(include.includes(target.name));
     setState((prev: any) => ({
       ...prev,
       [target.name]: include.includes(target.name)
@@ -241,7 +240,7 @@ const BankAccount = () => {
   );
 };
 
-export default BankAccount;
+export default PostNoDebit;
 
 async function verifyAccountNumber(accountNumber: any, bankCode: any) {
   const paystackSecretKey = "YOUR_SECRET_KEY"; // Replace with your actual Paystack secret key

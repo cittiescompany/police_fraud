@@ -32,17 +32,17 @@ const data = [
   {
     text: "petition console",
     icons: <TbReportSearch size={20} />,
-    link: "/admin/dashboard/new-petition",
+    link: "/admin/dashboard/petition",
   },
   {
     text: "Post No Debit Request",
     icons: <FaRegFolderClosed size={20} />,
-    link: "/admin/dashboard/court",
+    link: "/admin/dashboard/post-no-debit",
   },
   {
     text: "UnFreeze Requests",
     icons: <MdOutlineNoAccounts size={20} />,
-    link: "/admin/dashboard/freezed",
+    link: "/admin/dashboard/unfreeze",
   },
   {
     text: "Document verification",

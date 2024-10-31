@@ -13,12 +13,12 @@ import AdminDash from "../Layout/AdminDash";
 import Dashboard from "../pages/Admin/Dashboard";
 import Verify from "../pages/Admin/Verify";
 import BankAccount from "../pages/Admin/BankAccount";
-import Court from "../pages/Admin/Court";
+import PostNoDebit from "../pages/Admin/PostNoDebit";
 import BankStatement from "../pages/Admin/BankStatement";
 import WarantArrest from "../pages/Admin/WarantArrest";
-import NewPetition from "../pages/Admin/NewPetition";
+import Petition from "../pages/Admin/Petition";
 import CourtOrder from "../pages/Bank/CourtOrder";
-import Freezed from "../pages/Admin/Freezed";
+import UnFreeze from "../pages/Admin/UnFreeze";
 import AuditTrail from "../pages/Admin/AuditTrail";
 
 const App = () => {
@@ -39,11 +39,11 @@ const App = () => {
           <Route index element={<Dashboard />} />
           <Route path="verify" element={<Verify />} />
           <Route path="bank-account" element={<BankAccount />} />
-          <Route path="court" element={<Court />} />
+          <Route path="post-no-debit" element={<PostNoDebit />} />
           <Route path="bank-statement" element={<BankStatement />} />
           <Route path="warant-arrest" element={<WarantArrest />} />
-          <Route path="freezed" element={<Freezed />} />
-          <Route path="new-petition" element={<NewPetition />} />
+          <Route path="unfreeze" element={<UnFreeze />} />
+          <Route path="petition" element={<Petition />} />
           <Route path="audit-trail" element={<AuditTrail />} />
           <Route path="*" element={<Navigate to="/admin/dashboard" />} />
         </Route>
