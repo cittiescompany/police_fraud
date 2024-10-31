@@ -32,17 +32,17 @@ const data = [
   {
     text: "petition console",
     icons: <TbReportSearch size={20} />,
-    link: "/admin/dashboard/new-petition",
+    link: "/admin/dashboard/petition",
   },
   {
     text: "Post No Debit Request",
     icons: <FaRegFolderClosed size={20} />,
-    link: "/admin/dashboard/court",
+    link: "/admin/dashboard/post-no-debit",
   },
   {
     text: "UnFreeze Requests",
     icons: <MdOutlineNoAccounts size={20} />,
-    link: "/admin/dashboard/freezed",
+    link: "/admin/dashboard/unfreeze",
   },
   {
     text: "Document verification",
@@ -138,12 +138,12 @@ const data1 = [
   {
     text: "Post No Debit",
     icons: <GrProjects size={20} />,
-    link: "/bank/dashboard",
+    link: "/bank/dashboard/post-not-debit",
   },
   {
     text: "UnFreeze Request",
     icons: <BiSolidUserAccount size={20} />,
-    link: "/bank/dashboard",
+    link: "/bank/dashboard/unfreeze",
   },
   {
     text: "Report Fraud",

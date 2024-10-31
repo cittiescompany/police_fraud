@@ -14,7 +14,7 @@ const thData =
     ","
   );
 
-const BankAccount = () => {
+const PostNoDebit = () => {
   const [open, setOpen] = useState("");
   const [data] = useGetData(`https://api.paystack.co/bank`);
   const [acctName, setAcctName] = useState("");
@@ -30,7 +30,6 @@ const BankAccount = () => {
     acct_name: "",
   });
   const handleChange = ({ target }: any) => {
-    console.log(include.includes(target.name));
     setState((prev: any) => ({
       ...prev,
       [target.name]: include.includes(target.name)
@@ -53,7 +52,7 @@ const BankAccount = () => {
 
   const Fetcher = async () => {
     try {
-      const res = await axios.get(`${adminUrl}user/post_no_bill/all`);
+      const res = await axios.get(`${adminUrl}user/post_no_bill/all?type=true`);
       setAll(res.data.data);
     } catch (error: any) {
       console.log(error);
@@ -84,6 +83,7 @@ const BankAccount = () => {
         ...state,
         acct_name: acctName,
         ...data.data.find((val: any) => val.code == state.bank),
+        type: true,
       }).map(([key, val]: any) => {
         form.set(key, val);
       });
@@ -241,7 +241,7 @@ const BankAccount = () => {
   );
 };
 
-export default BankAccount;
+export default PostNoDebit;
 
 async function verifyAccountNumber(accountNumber: any, bankCode: any) {
   const paystackSecretKey = "YOUR_SECRET_KEY"; // Replace with your actual Paystack secret key
