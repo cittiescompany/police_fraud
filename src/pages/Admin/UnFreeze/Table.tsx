@@ -3,7 +3,7 @@ import { Table, Button, Tag, Dropdown, Menu } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import { EllipsisOutlined } from "@ant-design/icons";
 
-const App: React.FC = ({ data }: any) => {
+const App: React.FC = ({ data, setState }: any) => {
   const menu = (
     <Menu
       style={{
@@ -62,22 +62,22 @@ const App: React.FC = ({ data }: any) => {
     },
     {
       title: "Court Order",
-      dataIndex: "file",
-      key: "file",
+      dataIndex: "court_order",
+      key: "court_order",
       width: 150,
       render: (record: any) => (
-        <Button type="primary" size="medium">
+        <Button type="primary" onClick={() => setState(record)} size="medium">
           View
         </Button>
       ),
     },
     {
       title: "Cover letter",
-      dataIndex: "file",
-      key: "file",
+      dataIndex: "cover_letter",
+      key: "cover_letter",
       width: 150,
       render: (record: any) => (
-        <Button type="primary" size="medium">
+        <Button type="primary" onClick={() => setState(record)} size="medium">
           View
         </Button>
       ),
