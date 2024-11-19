@@ -1030,6 +1030,7 @@ export const fetcher = async (url: any, request: HttpMethod = "get", data: any =
   const split = url.split("kunpexchange")
   try {
     const result = await axios[request](split[0], data ? data : headerData(split[1]))
+    console.log(result)
     if (formatResponse) return result;
     if (result.data.status) return { ...result.data };
     else {

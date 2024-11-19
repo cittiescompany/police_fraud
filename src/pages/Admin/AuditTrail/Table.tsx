@@ -17,15 +17,27 @@ const App: React.FC = ({ data }: any) => {
   const columns: TableColumnsType<any> = [
     {
       title: "email address",
-      dataIndex: "date",
+      dataIndex: "email",
     },
     {
-      title: "Date",
-      dataIndex: "suit_number",
+      title: "Name",
+      dataIndex: "name",
+    },
+    {
+      title: "Indicator",
+      dataIndex: "isOfficer",
+      key: "isOfficer",
+      render:(record:any)=>(
+        <div>
+          {
+            record?"Police":"Bank"
+          }
+        </div>
+      )
     },
     {
       title: "Last Login",
-      dataIndex: "bank_name",
+      dataIndex: "lastLogin",
     },
 
     {

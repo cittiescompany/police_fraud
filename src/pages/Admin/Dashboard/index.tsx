@@ -19,7 +19,7 @@ import { FaUsers } from "react-icons/fa";
 import { BiAddToQueue } from "react-icons/bi";
 import { MdOutlineReport, MdOutlineCases } from "react-icons/md";
 import { adminUrl } from "../../../BackendUrl";
-import { useGetData } from "../../../content";
+
 
 const AdminDashboard = () => {
   const { admin }: any = useSelector((state: any) => state.admin);
