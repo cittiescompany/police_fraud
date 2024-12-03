@@ -109,7 +109,7 @@ const AdminSignup = (): JSX.Element => {
             value="police"
             className="lt-417:text-[0.6rem]"
           >
-            police officer
+           PSFU
           </ToggleButton>
           <ToggleButton
             sx={{
@@ -118,7 +118,7 @@ const AdminSignup = (): JSX.Element => {
             value="bank"
             className="lt-417:text-[0.6rem]"
           >
-            bank complaint officer
+            Bank Compliance Unit(BCU)
           </ToggleButton>
         </ToggleButtonGroup>
         <SwitchTransition mode="out-in">
