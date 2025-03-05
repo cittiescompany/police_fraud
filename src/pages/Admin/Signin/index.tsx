@@ -9,6 +9,19 @@ import { message } from "antd";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import {  Autoplay } from "swiper/modules";
+
+const data:any=[
+  'https://res.cloudinary.com/daruz/image/upload/v1739207090/commisioner_2_ndqbnw.jpg',
+  'https://res.cloudinary.com/daruz/image/upload/v1739207090/commisioner_ukj7ki.jpg',
+  'https://res.cloudinary.com/daruz/image/upload/v1739207089/commissioner_xtmfut.jpg',
+  'https://res.cloudinary.com/daruz/image/upload/v1739221594/war_againt_fraud_d9f7qb.jpg'
+]
+const data1:any=[
+  'https://res.cloudinary.com/daruz/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1739215710/banks_hswh6k.jpg'
+]
 
 const AdminSignup = (): JSX.Element => {
   const [searchParams] = useSearchParams();
@@ -73,22 +86,22 @@ const AdminSignup = (): JSX.Element => {
             classNames="slide"
           >
             <>
-              <img
-                src={
-                  alignment == "police"
-                    ? "/assets/police.jpg"
-                    : "/assets/bankOfficer.jpg"
-                }
-                alt="newImage"
-                className={`rounded min-h-[420px] my-auto absolute ${
-                  alignment == "bank" ? "top-5" : ""
-                }`}
-              />
-              <h1 className="text-3xl absolute top-[40%] max-sm:text-[1.2rem] right-[25%] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 mb-4">
-                {alignment == "police"
-                  ? "War against Crime"
-                  : "Bank complaint Officer"}
-              </h1>
+              <Swiper
+                modules={[ Autoplay]}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop
+                className="w-full h-full"
+              >
+                {[...(alignment==='police'?data:data1)].map((val)=>(
+                <SwiperSlide className="w-full h-full  relative">
+                  <img
+                    src={val}
+                    className="w-[99%] bg-white/20  backdrop-blur-md object-cover size-fit h-[380px]"
+                    alt={`Slide ${val}`}
+                  />
+                </SwiperSlide>
+                ))}
+              </Swiper>
             </>
           </CSSTransition>
         </SwitchTransition>
@@ -109,7 +122,7 @@ const AdminSignup = (): JSX.Element => {
             value="police"
             className="lt-417:text-[0.6rem]"
           >
-           PSFU
+            PSFU
           </ToggleButton>
           <ToggleButton
             sx={{

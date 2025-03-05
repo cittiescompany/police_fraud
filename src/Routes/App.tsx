@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
+import "swiper/css";
+import "swiper/css/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import AddToHomeScreen from "../components/AddHomeComp";
 import "../App.css";
